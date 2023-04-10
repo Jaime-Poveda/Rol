@@ -9,6 +9,10 @@ const supabaseKey =
 const _supabase = createClient(supabaseUrl, supabaseKey);
 //console.log("Supabase Instance: ", _supabase);
 
+$("#registerButton").click()(function () {
+  console.log("hola");
+})
+
 //Registro
 /* console.log(
   await _supabase.auth.signUp({
@@ -17,8 +21,9 @@ const _supabase = createClient(supabaseUrl, supabaseKey);
   })
 ); */
 
+
 //Login
-console.log("Login:");
+/* console.log("Login:");
 console.log(
   await _supabase.auth.signInWithPassword({
     email: "example@email.com",
@@ -29,7 +34,8 @@ console.log(
 console.log("Session:");
 console.log(await _supabase.auth.getSession());
 console.log("User:");
-console.log(await _supabase.auth.getUser());
+console.log(await _supabase.auth.getUser()); */
+
 
 /* const { data, error } = await _supabase.auth.getSession()
 console.log(data); */
