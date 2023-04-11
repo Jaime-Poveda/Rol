@@ -4,26 +4,53 @@ const SUPABASE_KEY =
 
 const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-if (localStorage.getItem("User") === "") {
-  $("#logZone").append(`
-    <a href="login.html" class="btn btn-primary">Login</a>
-  `);
-} else {
-  $("#logZone").append(
-    `
-    Hola ` +
-      localStorage.getItem("User") +
-      `
-    <button id="logOutButton" class="btn btn-danger">Logout</button>
-  `
-  );
-}
+document.addEventListener("DOMContentLoaded", async function (event) {
+  loadLogin();
+  testZone();
 
-document.addEventListener("DOMContentLoaded", function (event) {
   $("#signUpForm").submit(signUp);
   $("#logInForm").submit(logIn);
   $("#logOutButton").click(logOut);
 });
+
+async function loadLogin() {
+  if (localStorage.getItem("User") === "") {
+    $("#logZone").append(`
+      <a href="login.html" class="btn btn-primary">Login</a>
+    `);
+  } else {
+    $("#logZone").append(
+      `
+      Hola ` +
+        localStorage.getItem("User") +
+        `
+      <button id="logOutButton" class="btn btn-danger">Logout</button>
+    `
+    );
+  }
+}
+
+async function testZone() {
+  let user = await SUPABASE.auth.getUser();
+  user = user.data.user;
+
+  let testRows = await SUPABASE.from("test").select();
+  let userRow = testRows.data.find((element) => element.userId == user.id);
+
+  $("#testZone").append(
+    `
+      Id: ` +
+      userRow.id +
+      `<br>
+      User Id: ` +
+      userRow.userId +
+      `<br>
+      Date: ` +
+      userRow.created_at +
+      `
+    `
+  );
+}
 
 function signUp(event) {
   event.preventDefault();
