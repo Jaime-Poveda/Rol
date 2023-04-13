@@ -6,11 +6,16 @@ const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 document.addEventListener("DOMContentLoaded", async function (event) {
   loadLogin();
-  testZone();
+  //testZone();
 
   $("#signUpForm").submit(signUp);
   $("#logInForm").submit(logIn);
+  $("#createCharacterForm").submit(createCharacter);
   $("#logOutButton").click(logOut);
+  $("#addAttr").click(addAttribute);
+  $(".btnDelete").click(deleteElement);
+  $("#addItem").click(addItem);
+  $("#addSkill").click(addSkill);
 });
 
 async function loadLogin() {
@@ -36,6 +41,8 @@ async function testZone() {
 
   let testRows = await SUPABASE.from("test").select();
   let userRow = testRows.data.find((element) => element.userId == user.id);
+
+  localStorage.setItem("UserId", userRow.userId);
 
   $("#testZone").append(
     `
@@ -98,7 +105,6 @@ function logOut(event) {
   SUPABASE.auth
     .signOut()
     .then((_response) => {
-      console.log(_response);
       localStorage.setItem("User", "");
       alert("Logout successful");
       window.location.href = "index.html";
@@ -106,4 +112,162 @@ function logOut(event) {
     .catch((err) => {
       alert(err.response.text);
     });
+}
+
+function createCharacter(event) {
+  event.preventDefault();
+
+  /* console.log(
+    $("#charSystem")
+  ); */
+
+  /* console.log(
+    $("#charSystem")[0].value,
+    $("#charName")[0].value,
+    $("#charDesc")[0].value,
+    $("#charRace")[0].value,
+    $("#charClass")[0].value,
+    $("#charLevel")[0].value,
+    $("#charHP")[0].value
+  ); */
+
+  SUPABASE.from("personajes")
+    .insert({
+      userId: localStorage.getItem("UserId"),
+      system: $("#charSystem")[0].value,
+      name: $("#charName")[0].value,
+      description: $("#charDesc")[0].value,
+      race: $("#charRace")[0].value,
+      class: $("#charClass")[0].value,
+      level: $("#charLevel")[0].value,
+      hp: $("#charHP")[0].value,
+    })
+    .then((_response) => {
+      alert("Create successful");
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
+}
+
+function addAttribute(event) {
+  /* console.log($("#attributeName")); */
+
+  $("#attrZone").append(
+    `
+  <div class="input-group mt-2 attrGroup">
+    <input type="text" class="form-control input-group-text text-center" placeholder="Atr" value="` +
+      $("#attributeName")[0].value +
+      `">
+    <input type="number" class="form-control  text-center" placeholder="0" value="` +
+      $("#attributeBase")[0].value +
+      `">
+    <input type="number" class="form-control  text-center" placeholder="0" value="` +
+      $("#attributeSum")[0].value +
+      `">
+    <input type="number" class="form-control  text-center" placeholder="0" value="` +
+      $("#attributeTotal")[0].value +
+      `">
+    <input type="number" class="form-control  text-center" placeholder="0" value="` +
+      $("#attributeModifier")[0].value +
+      `">
+
+    <span class="input-group-text text-center p-0">
+        <button type="button" class="btn btn-light btnDelete">
+            -
+        </button>
+    </span>
+  </div>
+  `
+  );
+
+  $(".btnDelete").click(deleteElement);
+}
+
+function deleteElement(event) {
+  event.target.parentElement.parentElement.remove();
+}
+
+function addItem(event) {
+  $("#itemZone").append(
+    `
+    <div class="input-group mt-3">
+        <div class="" style="width: 90%;">
+            <div class="input-group">
+                <span class="input-group-text" style="width: 100px;">Nombre</span>
+                <input type="text" class="form-control rounded-0 text-center" placeholder="Item" value="` +
+      $("#itemName")[0].value +
+      `">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" style="width: 100px;">Descripción</span>
+                <textarea class="form-control rounded-0 text-center" placeholder="Descripción">` +
+      $("#itemDesc")[0].value +
+      `</textarea>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" style="width: 100px;">Cantidad</span>
+                <input type="number" class="form-control rounded-0 text-center" placeholder="0"  value="` +
+      $("#itemAmount")[0].value +
+      `">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" style="width: 100px;">Daño</span>
+                <input type="text" class="form-control rounded-0 text-center" placeholder="0"  value="` +
+      $("#itemDamage")[0].value +
+      `">
+            </div>
+        </div>
+        <span class="input-group-text text-center p-0" style="width: 10%;">
+            <button type="button" class="btn btn-light btnDelete" style="height: 100%; width: 100%;">
+                -
+            </button>
+        </span>
+    </div>
+  `
+  );
+
+  $(".btnDelete").click(deleteElement);
+}
+
+function addSkill(event) {
+  $("#skillZone").append(
+    `
+    <div class="input-group mt-3">
+        <div class="" style="width: 90%;">
+            <div class="input-group">
+                <span class="input-group-text" style="width: 100px;">Nombre</span>
+                <input type="text" class="form-control rounded-0 text-center" placeholder="Habilidad" value="` +
+      $("#skillName")[0].value +
+      `">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" style="width: 100px;">Descripción</span>
+                <textarea class="form-control rounded-0 text-center" placeholder="Descripción">` +
+      $("#skillDesc")[0].value +
+      `</textarea>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" style="width: 100px;">Daño</span>
+                <input type="text" class="form-control rounded-0 text-center" placeholder="0" value="` +
+      $("#skillDamage")[0].value +
+      `">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" style="width: 100px;">Efecto</span>
+                <input type="text" class="form-control rounded-0 text-center" placeholder="Efecto" value="` +
+      $("#skillEffect")[0].value +
+      `">
+            </div>
+        </div>
+        <span class="input-group-text text-center p-0" style="width: 10%;">
+            <button type="button" class="btn btn-light btnDelete" style="height: 100%; width: 100%;">
+                -
+            </button>
+        </span>
+    </div>
+  `
+  );
+
+  $(".btnDelete").click(deleteElement);
 }
