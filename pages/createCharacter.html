@@ -29,7 +29,7 @@
                         <h3>Nombre</h3>
                     </label>
                     <input type="text" class="form-control" id="charName"
-                        placeholder="Introduce el nombre de tu personaje" required>
+                        placeholder="Introduce el nombre de tu personaje">
                 </div>
                 <div class="form-group mb-2">
                     <label for="">
@@ -67,6 +67,9 @@
                     </label>
                     <!-- <input type="text" class="form-control" id="" placeholder="Introduce el atributo"> -->
                     <p>Nombre, Valor Base, Suma, Valor Total, Modificador</p>
+                    <button id="addBasicAttr" type="button" class="btn btn-success text-light mb-2">
+                        Insertar atributos básicos
+                    </button>
                     <div class="input-group">
                         <input type="text" class="form-control input-group-text text-center" id="attributeName"
                             placeholder="Atr">
@@ -81,123 +84,7 @@
                             </button>
                         </span>
                     </div>
-                    <div id="attrZone">
-                        <div class="input-group mt-2 attrGroup">
-                            <input type="text" class="form-control input-group-text text-center" placeholder="Atr"
-                                value="FUE">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <span class="input-group-text text-center p-0">
-                                <button type="button" class="btn btn-light btnDelete">
-                                    -
-                                </button>
-                            </span>
-                        </div>
-                        <div class="input-group mt-2 attrGroup">
-                            <input type="text" class="form-control input-group-text text-center" placeholder="Atr"
-                                value="DES">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <span class="input-group-text text-center p-0">
-                                <button type="button" class="btn btn-light btnDelete">
-                                    -
-                                </button>
-                            </span>
-                        </div>
-                        <div class="input-group mt-2 attrGroup">
-                            <input type="text" class="form-control input-group-text text-center" placeholder="Atr"
-                                value="CON">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <span class="input-group-text text-center p-0">
-                                <button type="button" class="btn btn-light btnDelete">
-                                    -
-                                </button>
-                            </span>
-                        </div>
-                        <div class="input-group mt-2 attrGroup">
-                            <input type="text" class="form-control input-group-text text-center" placeholder="Atr"
-                                value="CAR">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <span class="input-group-text text-center p-0">
-                                <button type="button" class="btn btn-light btnDelete">
-                                    -
-                                </button>
-                            </span>
-                        </div>
-                        <div class="input-group mt-2 attrGroup">
-                            <input type="text" class="form-control input-group-text text-center" placeholder="Atr"
-                                value="INT">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <span class="input-group-text text-center p-0">
-                                <button type="button" class="btn btn-light btnDelete">
-                                    -
-                                </button>
-                            </span>
-                        </div>
-                        <div class="input-group mt-2 attrGroup">
-                            <input type="text" class="form-control input-group-text text-center" placeholder="Atr"
-                                value="SAB">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <input type="number" class="form-control text-center" placeholder="0" value="0">
-                            <span class="input-group-text text-center p-0">
-                                <button type="button" class="btn btn-light btnDelete">
-                                    -
-                                </button>
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Equipo</h3>
-                    </label>
-                    <!-- <input type="text" class="form-control" id="" placeholder="Introduce el equipo"> -->
-                    <div class="input-group">
-                        <div class="" style="width: 90%;">
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Nombre</span>
-                                <input type="text" id="itemName" class="form-control rounded-0 text-center"
-                                    placeholder="Item">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Cantidad</span>
-                                <input type="number" id="itemAmount" class="form-control rounded-0 text-center"
-                                    placeholder="0" value="1">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Descripción</span>
-                                <textarea class="form-control rounded-0 text-center" id="itemDesc"
-                                    placeholder="Descripción"></textarea>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Daño</span>
-                                <input type="text" id="itemDamage" class="form-control rounded-0 text-center"
-                                    placeholder="0">
-                            </div>
-                        </div>
-                        <span class="input-group-text text-center p-0" style="width: 10%;">
-                            <button type="button" id="addItem" class="btn btn-light" style="height: 100%; width: 100%;">
-                                +
-                            </button>
-                        </span>
-                    </div>
-                    <div id="itemZone">
+                    <div id="attrZone" class="mt-3">
 
                     </div>
                 </div>
@@ -237,6 +124,44 @@
                         </span>
                     </div>
                     <div id="skillZone">
+
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="">
+                        <h3>Equipo</h3>
+                    </label>
+                    <!-- <input type="text" class="form-control" id="" placeholder="Introduce el equipo"> -->
+                    <div class="input-group">
+                        <div class="" style="width: 90%;">
+                            <div class="input-group">
+                                <span class="input-group-text" style="width: 100px;">Nombre</span>
+                                <input type="text" id="itemName" class="form-control rounded-0 text-center"
+                                    placeholder="Item">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text" style="width: 100px;">Cantidad</span>
+                                <input type="number" id="itemAmount" class="form-control rounded-0 text-center"
+                                    placeholder="0" value="1">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text" style="width: 100px;">Descripción</span>
+                                <textarea class="form-control rounded-0 text-center" id="itemDesc"
+                                    placeholder="Descripción"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text" style="width: 100px;">Daño</span>
+                                <input type="text" id="itemDamage" class="form-control rounded-0 text-center"
+                                    placeholder="0">
+                            </div>
+                        </div>
+                        <span class="input-group-text text-center p-0" style="width: 10%;">
+                            <button type="button" id="addItem" class="btn btn-light" style="height: 100%; width: 100%;">
+                                +
+                            </button>
+                        </span>
+                    </div>
+                    <div id="itemZone">
 
                     </div>
                 </div>
