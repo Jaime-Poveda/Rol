@@ -325,4 +325,6 @@ async function createCharacter(event) {
         alert(err.response.text);
       });
   }
+
+  alert("Create successful");
 }

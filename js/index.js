@@ -6,7 +6,7 @@ const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 document.addEventListener("DOMContentLoaded", async function (event) {
   loadLogin();
-  testZone();
+  //testZone();
   loadCharacters();
 });
 
@@ -71,11 +71,26 @@ async function loadCharacters() {
     .eq("userId", user.data.user.id);
 
   //console.log(characterRow);
+  for (let i = 0; i < characterRow.data.length; i++) {
+    //console.log(characterRow.data[i]);
+    $("#charactersZone").append(
+      `
+      <div class="card" style="width: 200px;">
+        <a href="character.html?id=`+characterRow.data[i].id+`">
+            <div class="card-body">
+                <h5 class="card-title">` +
+        characterRow.data[i].name +
+        `</h5>
+                <h6 class="card-subtitle mb-2 text-muted">` +
+        new Date(characterRow.data[i].date).toLocaleDateString() +
+        `</h6>
+                <p class="card-text">` +
+        characterRow.data[i].description +
+        `</p>
+            </div>
+        </a>
+      </div>
+    `
+    );
+  }
 }
-
-const params = new Proxy(new URLSearchParams(window.location.search), {
-  get: (searchParams, prop) => searchParams.get(prop),
-});
-// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-let value = params.id;
-console.log(params.id);
