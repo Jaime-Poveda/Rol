@@ -7,6 +7,7 @@ const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 document.addEventListener("DOMContentLoaded", async function (event) {
   loadLogin();
   testZone();
+  loadCharacters();
 
   $("#signUpForm").submit(signUp);
   $("#logInForm").submit(logIn);
@@ -97,8 +98,6 @@ function logIn(event) {
 
 function logOut(event) {
   event.preventDefault();
-
-  console.log("hola");
 
   SUPABASE.auth
     .signOut()
@@ -426,3 +425,21 @@ async function createCharacter(event) {
   }
 }
 
+async function loadCharacters() {
+  let user = await SUPABASE.auth.getUser();
+
+  //console.log(user.data);
+
+  let characterRow = await SUPABASE.from("characters")
+    .select()
+    .eq("userId", user.data.user.id);
+
+  //console.log(characterRow);
+}
+
+const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+let value = params.id;
+console.log(params.id);
