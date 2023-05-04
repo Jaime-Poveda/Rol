@@ -33,36 +33,38 @@ async function loadCharacter(id) {
         <div class="card">
             <div class="card-body">
                 <h1 class="card-title text-center">` +
-      characterRow.data[0].name +
-      `</h1>
+    characterRow.data[0].name +
+    `</h1>
                 <h2 class="card-subtitle mb-2 text-muted text-center">` +
-      new Date(characterRow.data[0].date).toLocaleDateString() +
-      `</h2>
+    new Date(characterRow.data[0].date).toLocaleDateString() +
+    `</h2>
+                <h5 class="card-title">Características</h5>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Características</h5>
-                        <p class="card-text">Descripción: ` +
-      characterRow.data[0].description +
-      `</p>
-                        <p class="card-text">Raza: ` +
-      characterRow.data[0].race +
-      `</p>
-                        <p class="card-text">Clase: ` +
-      characterRow.data[0].class +
-      `</p>
-                        <p class="card-text">Nivel: ` +
-      characterRow.data[0].level +
-      `</p>
-                        <p class="card-text">HP: ` +
-      characterRow.data[0].hp +
-      `</p>
+                        <p class="card-text d-flex flex-row"><b>Sistema:</b> &nbsp` +
+    characterRow.data[0].system +
+    `</p>
+                        <p class="card-text d-flex flex-row"><b>Descripción:</b> &nbsp` +
+    characterRow.data[0].description +
+    `</p>
+                        <p class="card-text d-flex flex-row"><b>Raza:</b> &nbsp` +
+    characterRow.data[0].race +
+    `</p>
+                        <p class="card-text d-flex flex-row"><b>Clase:</b> &nbsp` +
+    characterRow.data[0].class +
+    `</p>
+                        <p class="card-text d-flex flex-row"><b>Nivel:</b> &nbsp` +
+    characterRow.data[0].level +
+    `</p>
+                        <p class="card-text d-flex flex-row"><b>HP:</b> &nbsp` +
+    characterRow.data[0].hp +
+    `</p>
+                        <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 25px; height: 25px;"><img src="../img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-body" id="attrZone">
-                        <h5 class="card-title">Atributos</h5>
-                    </div>
+                <div id="attrZone">
+                    <h5 class="card-title">Atributos</h5>
                 </div>
 
                 <div id="itemsZone">
@@ -74,46 +76,160 @@ async function loadCharacter(id) {
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar personaje</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <input id="charId" type="hidden" class="form-control" value="` +
+    characterRow.data[0].id +
+    `">
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Sisema</span>
+                        <input id="charSystem" type="text" class="form-control" value="` +
+    characterRow.data[0].system +
+    `">
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Nombre</span>
+                        <input id="charName" type="text" class="form-control" value="` +
+    characterRow.data[0].name +
+    `">
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                        <textarea id="charDesc" class="form-control" aria-label="With textarea">` +
+    characterRow.data[0].description +
+    `</textarea>
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Clase</span>
+                        <input id="charClass" type="text" class="form-control" value="` +
+    characterRow.data[0].class +
+    `">
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Nivel</span>
+                        <input id="charLevel" type="number" class="form-control" value="` +
+    characterRow.data[0].level +
+    `">
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">HP</span>
+                        <input id="charHP" type="number" class="form-control" value="` +
+    characterRow.data[0].hp +
+    `">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="updateCharacterButton" type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="attrModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Actualizar atributo</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="attrModalBody">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="updateAttrButton" type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="itemModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Actualizar item</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="itemModalBody">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="updateItemButton" type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     `
   );
 
+  $("#updateCharacterButton").click(updateCharacter);
+  $("#updateAttrButton").click(updateAttr);
+  $("#updateItemButton").click(updateItem);
+
   for (let i = 0; i < attributes.data.length; i++) {
     $("#attrZone").append(
-      `<p class="card-text">` +
-        attributes.data[i].name +
-        ` | Base: ` +
-        attributes.data[i].baseValue +
-        ` | Suma: ` +
-        attributes.data[i].sum +
-        ` | Total: ` +
-        attributes.data[i].totalValue +
-        ` | Modificador: ` +
-        attributes.data[i].modifier
+      `
+        <div class="card">
+            <div class="card-body">
+                <div class="card-text d-flex flex-row">
+                    <div class="attrId" hidden>` +
+      attributes.data[i].id +
+      `</div><div class="attrName fw-bold">` +
+      attributes.data[i].name +
+      `</div>&nbsp&nbsp  <i>Base:</i> &nbsp<div class="attrBase">` +
+      attributes.data[i].baseValue +
+      `</div>&nbsp&nbsp <i>Suma:</i> &nbsp<div class="attrSum">` +
+      attributes.data[i].sum +
+      `</div>&nbsp&nbsp <i>Total:</i> &nbsp<div class="attrTotal">` +
+      attributes.data[i].totalValue +
+      `</div>&nbsp&nbsp <i>Modificador:</i> &nbsp<div class="attrMod">` +
+      attributes.data[i].modifier +
+      `
+                    </div>&nbsp&nbsp
+                    <button type="button" class="editAttr btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#attrModal" style="width: 25px; height: 25px;"><img src="../img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                </div>
+            </div>
+        </div>`
     );
   }
+  $(".editAttr").click(editAttr);
 
   for (let i = 0; i < items.data.length; i++) {
     $("#itemsZone").append(
       `
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">` +
-        items.data[i].name +
-        `</h5>
-                <h6 class="card-subtitle mb-2 text-muted">` +
-        items.data[i].description +
-        `</h6>
-                <p class="card-text">Cantidad: ` +
-        items.data[i].amount +
-        `</p>
-                <p class="card-text">Daño: ` +
-        items.data[i].damage +
-        `</p>
+                <div class="itemId" hidden>` +
+      items.data[i].id +
+      `</div>
+                <h5 class="card-title itemName">` +
+      items.data[i].name +
+      `</h5>
+                <h6 class="card-subtitle mb-2 text-muted itemDesc">` +
+      items.data[i].description +
+      `</h6>
+                <div class="d-flex flex-row">Cantidad:&nbsp<div class="card-text itemAmount">` +
+      items.data[i].amount +
+      `</div></div>
+                <div class="d-flex flex-row">Daño:&nbsp<div class="card-text itemDamage"> ` +
+      items.data[i].damage +
+      `</div></div>
+                <button type="button" class="editItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#itemModal" style="width: 25px; height: 25px;"><img src="../img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
             </div>
         </div>
         `
     );
   }
+  $(".editItem").click(editItem);
 
   for (let i = 0; i < skills.data.length; i++) {
     $("#skillsZone").append(
@@ -121,21 +237,156 @@ async function loadCharacter(id) {
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">` +
-        skills.data[i].name +
-        `</h5>
+      skills.data[i].name +
+      `</h5>
                 <p class="card-text">Daño: ` +
-        skills.data[i].damage +
-        `</p>
+      skills.data[i].damage +
+      `</p>
                 <h6 class="card-subtitle mb-2 text-muted">` +
-        skills.data[i].description +
-        `</h6>
+      skills.data[i].description +
+      `</h6>
                 
                 <p class="card-text">Efecto: ` +
-        skills.data[i].effect +
-        `</p>
+      skills.data[i].effect +
+      `</p>
             </div>
         </div>
         `
     );
   }
+}
+
+function updateCharacter(event) {
+  SUPABASE.from("characters")
+    .update({
+      name: $("#charName").val(),
+      system: $("#charSystem").val(),
+      description: $("#charDesc").val(),
+      race: $("#charRace").val(),
+      class: $("#charClass").val(),
+      level: $("#charLevel").val(),
+      hp: $("#charHP").val(),
+    })
+    .eq("id", $("#charId").val())
+    .then((_response) => {
+      alert("Update successful");
+      window.location.href = "character.html?id=" + $("#charId").val();
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
+}
+
+function editAttr(event) {
+  $("#attrModalBody").empty();
+
+  $("#attrModalBody").append(
+    `
+    <input type="hidden" class="form-control attrId" value="` +
+    event.target.parentNode.parentNode.querySelector(".attrId").innerText +
+    `">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Nombre</span>
+    <input type="text" class="form-control attrName" value="` +
+    event.target.parentNode.parentNode.querySelector(".attrName").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Valor Base</span>
+    <input type="text" class="form-control attrBase" value="` +
+    event.target.parentNode.parentNode.querySelector(".attrBase").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Suma</span>
+    <input type="text" class="form-control attrSum" value="` +
+    event.target.parentNode.parentNode.querySelector(".attrSum").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Total</span>
+    <input type="text" class="form-control attrTotal" value="` +
+    event.target.parentNode.parentNode.querySelector(".attrTotal").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Modificador</span>
+    <input type="text" class="form-control attrMod" value="` +
+    event.target.parentNode.parentNode.querySelector(".attrMod").innerText +
+    `">
+  </div>
+  `
+  );
+}
+function updateAttr(event) {
+  SUPABASE.from("attributes")
+    .update({
+      name: event.target.parentNode.parentNode.querySelector(".attrName").value,
+      baseValue: event.target.parentNode.parentNode.querySelector(".attrBase").value,
+      sum: event.target.parentNode.parentNode.querySelector(".attrSum").value,
+      totalValue: event.target.parentNode.parentNode.querySelector(".attrTotal").value,
+      modifier: event.target.parentNode.parentNode.querySelector(".attrMod").value,
+    })
+    .eq("id", event.target.parentNode.parentNode.querySelector(".attrId").value)
+    .then((_response) => {
+      alert("Update successful");
+      window.location.href = "character.html?id=" + $("#charId").val();
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
+}
+
+function editItem(event) {
+  //console.log(event.target.parentNode.parentNode);
+  $("#itemModalBody").empty();
+
+  $("#itemModalBody").append(
+    `
+    <input type="hidden" class="form-control itemId" value="` +
+    event.target.parentNode.parentNode.querySelector(".itemId").innerText +
+    `">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Nombre</span>
+    <input type="text" class="form-control itemName" value="` +
+    event.target.parentNode.parentNode.querySelector(".itemName").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Descripción</span>
+    <input type="text" class="form-control itemDesc" value="` +
+    event.target.parentNode.parentNode.querySelector(".itemDesc").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Cantidad</span>
+    <input type="text" class="form-control itemAmount" value="` +
+    event.target.parentNode.parentNode.querySelector(".itemAmount").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Daño</span>
+    <input type="text" class="form-control itemDamage" value="` +
+    event.target.parentNode.parentNode.querySelector(".itemDamage").innerText +
+    `">
+  </div>
+  `
+  );
+}
+function updateItem(event) {
+  SUPABASE.from("items")
+    .update({
+      name: event.target.parentNode.parentNode.querySelector(".itemName").value,
+      description: event.target.parentNode.parentNode.querySelector(".itemDesc").value,
+      amount: event.target.parentNode.parentNode.querySelector(".itemAmount").value,
+      damage: event.target.parentNode.parentNode.querySelector(".itemDamage").value,
+    })
+    .eq("id", event.target.parentNode.parentNode.querySelector(".itemId").value)
+    .then((_response) => {
+      alert("Update successful");
+      window.location.href = "character.html?id=" + $("#charId").val();
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
 }
