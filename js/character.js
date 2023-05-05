@@ -64,15 +64,15 @@ async function loadCharacter(id) {
                 </div>
 
                 <div id="attrZone">
-                    <h5 class="card-title">Atributos</h5>
+                    <h5 class="card-title">Atributos <button id="addAttrButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createAttrModal" style="width: 25px; height: 25px;"><img src="../img/icons/more.png" alt="AddButton" style="width: 100%;"></button></h5>
                 </div>
 
                 <div id="itemsZone">
-                    <h4>Equipo</h4>
+                    <h4>Equipo <button id="addItemButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createItemModal" style="width: 25px; height: 25px;"><img src="../img/icons/more.png" alt="AddButton" style="width: 100%;"></button></h4>
                 </div>
 
                 <div id="skillsZone">
-                    <h4>Habilidades</h4>
+                    <h4>Habilidades <button id="addSkillButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createSkillModal" style="width: 25px; height: 25px;"><img src="../img/icons/more.png" alt="AddButton" style="width: 100%;"></button></h4>
                 </div>
             </div>
         </div>
@@ -168,12 +168,141 @@ async function loadCharacter(id) {
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="skillModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Actualizar habilidad</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="skillModalBody">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="updateSkillButton" type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="createAttrModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Añadir atributo</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="attrModalBody">
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="basic-addon1">Nombre</span>
+                          <input type="text" class="form-control attrName">
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="basic-addon1">Valor Base</span>
+                          <input type="text" class="form-control attrBase">
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="basic-addon1">Suma</span>
+                          <input type="text" class="form-control attrSum">
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="basic-addon1">Total</span>
+                          <input type="text" class="form-control attrTotal">
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="basic-addon1">Modificador</span>
+                          <input type="text" class="form-control attrMod">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="createAttrButton" type="button" class="btn btn-primary">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="createItemModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Añadir item</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Nombre</span>
+                            <input type="text" class="form-control itemName">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Descripción</span>
+                            <input type="text" class="form-control itemDesc">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Cantidad</span>
+                            <input type="text" class="form-control itemAmount">
+                        </div>
+                            <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Daño</span>
+                            <input type="text" class="form-control itemDamage">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="createItemButton" type="button" class="btn btn-primary">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="createSkillModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Crear skill</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="skillModalBody">
+                        <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Nombre</span>
+                        <input type="text" class="form-control skillName">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                        <input type="text" class="form-control skillDesc">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Efecto</span>
+                        <input type="text" class="form-control skillEffect">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Daño</span>
+                        <input type="text" class="form-control skillDamage">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="createSkillButton" type="button" class="btn btn-primary">Crear</button>
+                </div>
+            </div>
+        </div>
     `
   );
 
   $("#updateCharacterButton").click(updateCharacter);
   $("#updateAttrButton").click(updateAttr);
   $("#updateItemButton").click(updateItem);
+  $("#updateSkillButton").click(updateSkill);
+
+  $("#addAttrButton").click(emptyModal);
+  $("#addItemButton").click(emptyModal);
+  $("#addSkillButton").click(emptyModal);
+
+  $("#createAttrButton").click(createAttr);
+  $("#createItemButton").click(createItem);
+  $("#createSkillButton").click(createSkill);
 
   for (let i = 0; i < attributes.data.length; i++) {
     $("#attrZone").append(
@@ -236,24 +365,29 @@ async function loadCharacter(id) {
       `
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">` +
+                <div class="skillId" hidden>` +
+      skills.data[i].id +
+      `</div>
+                <h5 class="card-title skillName">` +
       skills.data[i].name +
       `</h5>
-                <p class="card-text">Daño: ` +
+                <div class="d-flex flex-row">Daño:&nbsp<div class="card-text skillDamage">` +
       skills.data[i].damage +
-      `</p>
-                <h6 class="card-subtitle mb-2 text-muted">` +
+      `</div></div>
+                <h6 class="card-subtitle mb-2 text-muted skillDesc">` +
       skills.data[i].description +
       `</h6>
-                
-                <p class="card-text">Efecto: ` +
+                <div class="d-flex flex-row">Efecto:&nbsp<div class="card-text skillEffect">` +
       skills.data[i].effect +
-      `</p>
+      `</div></div>
+                <button type="button" class="editSkill btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#skillModal" style="width: 25px; height: 25px;"><img src="../img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
             </div>
         </div>
         `
     );
   }
+  $(".editSkill").click(editSkill);
+
 }
 
 function updateCharacter(event) {
@@ -384,6 +518,120 @@ function updateItem(event) {
     .eq("id", event.target.parentNode.parentNode.querySelector(".itemId").value)
     .then((_response) => {
       alert("Update successful");
+      window.location.href = "character.html?id=" + $("#charId").val();
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
+}
+
+function editSkill(event) {
+  $("#skillModalBody").empty();
+
+  $("#skillModalBody").append(
+    `
+    <input type="hidden" class="form-control skillId" value="` +
+    event.target.parentNode.parentNode.querySelector(".skillId").innerText +
+    `">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Nombre</span>
+    <input type="text" class="form-control skillName" value="` +
+    event.target.parentNode.parentNode.querySelector(".skillName").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Descripción</span>
+    <input type="text" class="form-control skillDesc" value="` +
+    event.target.parentNode.parentNode.querySelector(".skillDesc").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Efecto</span>
+    <input type="text" class="form-control skillEffect" value="` +
+    event.target.parentNode.parentNode.querySelector(".skillEffect").innerText +
+    `">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Daño</span>
+    <input type="text" class="form-control skillDamage" value="` +
+    event.target.parentNode.parentNode.querySelector(".skillDamage").innerText +
+    `">
+  </div>
+  `
+  );
+}
+function updateSkill(event) {
+  SUPABASE.from("skills")
+    .update({
+      name: event.target.parentNode.parentNode.querySelector(".skillName").value,
+      description: event.target.parentNode.parentNode.querySelector(".skillDesc").value,
+      effect: event.target.parentNode.parentNode.querySelector(".skillEffect").value,
+      damage: event.target.parentNode.parentNode.querySelector(".skillDamage").value,
+    })
+    .eq("id", event.target.parentNode.parentNode.querySelector(".skillId").value)
+    .then((_response) => {
+      alert("Update successful");
+      window.location.href = "character.html?id=" + $("#charId").val();
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
+}
+
+function emptyModal(event) {
+  /* console.log($(event.target.parentNode.getAttribute("data-bs-target"))[0]);
+  console.log($(event.target.parentNode.getAttribute("data-bs-target") + " input")); */
+  $(event.target.parentNode.getAttribute("data-bs-target") + " input").each(function () {
+    this.value = "";
+  });
+}
+
+function createAttr(event) {
+  SUPABASE.from("attributes")
+    .insert({
+      characterId: $("#charId").val(),
+      name: event.target.parentNode.parentNode.querySelector(".attrName").value,
+      baseValue: event.target.parentNode.parentNode.querySelector(".attrBase").value,
+      sum: event.target.parentNode.parentNode.querySelector(".attrSum").value,
+      totalValue: event.target.parentNode.parentNode.querySelector(".attrTotal").value,
+      modifier: event.target.parentNode.parentNode.querySelector(".attrMod").value,
+    })
+    .then((_response) => {
+      alert("Create successful");
+      window.location.href = "character.html?id=" + $("#charId").val();
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
+}
+function createItem(event) {
+  SUPABASE.from("items")
+    .insert({
+      characterId: $("#charId").val(),
+      name: event.target.parentNode.parentNode.querySelector(".itemName").value,
+      description: event.target.parentNode.parentNode.querySelector(".itemDesc").value,
+      amount: event.target.parentNode.parentNode.querySelector(".itemAmount").value,
+      damage: event.target.parentNode.parentNode.querySelector(".itemDamage").value,
+    })
+    .then((_response) => {
+      alert("Create successful");
+      window.location.href = "character.html?id=" + $("#charId").val();
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
+}
+function createSkill(event) {
+  SUPABASE.from("skills")
+    .insert({
+      characterId: $("#charId").val(),
+      name: event.target.parentNode.parentNode.querySelector(".skillName").value,
+      description: event.target.parentNode.parentNode.querySelector(".skillDesc").value,
+      effect: event.target.parentNode.parentNode.querySelector(".skillEffect").value,
+      damage: event.target.parentNode.parentNode.querySelector(".skillDamage").value,
+    })
+    .then((_response) => {
+      alert("Create successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
