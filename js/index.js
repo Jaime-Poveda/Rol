@@ -15,7 +15,7 @@ async function loadLogin() {
 
   if (user.data.user === null) {
     $("#logZone").append(`
-      <a href="pages/login.html" class="btn btn-primary">Login</a>
+      <a href="login.html" class="btn btn-primary">Login</a>
     `);
   } else {
     $("#logZone").append(
@@ -76,7 +76,7 @@ async function loadCharacters() {
     $("#charactersZone").append(
       `
       <div class="card" style="width: 200px;">
-        <a href="pages/character.html?id=`+characterRow.data[i].id+`">
+        <a href="character.html?id=`+characterRow.data[i].id+`">
             <div class="card-body">
                 <h5 class="card-title">` +
         characterRow.data[i].name +
