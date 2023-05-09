@@ -327,4 +327,5 @@ async function createCharacter(event) {
   }
 
   alert("Create successful");
+  window.location.href = "character.html?id=" + characterRow.data[0].id;
 }

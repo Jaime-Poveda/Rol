@@ -26,6 +26,9 @@ async function loadLogin() {
       <button id="logOutButton" class="btn btn-danger">Logout</button>
     `
     );
+    $("#characters").append(`
+      <a href="createCharacter.html" class="btn btn-success">Crear personaje</a>
+    `);
     $("#logOutButton").click(logOut);
   }
 }
@@ -76,7 +79,9 @@ async function loadCharacters() {
     $("#charactersZone").append(
       `
       <div class="card" style="width: 200px;">
-        <a href="character.html?id=`+characterRow.data[i].id+`">
+        <a href="character.html?id=` +
+        characterRow.data[i].id +
+        `">
             <div class="card-body">
                 <h5 class="card-title">` +
         characterRow.data[i].name +
