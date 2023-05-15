@@ -8,10 +8,11 @@ document.addEventListener("DOMContentLoaded", async function (event) {
   $("#signUpForm").submit(signUp);
 });
 
-function signUp(event) {
+async function signUp(event) {
   event.preventDefault();
-  let email = event.target[0].value;
-  let password = event.target[1].value;
+  let email = $("#registerEmail")[0].value;
+  let name = $("#registerName")[0].value;
+  let password = $("#registerPassword")[0].value;
 
   SUPABASE.auth
     .signUp({ email, password })
@@ -19,11 +20,40 @@ function signUp(event) {
       if (response.error) {
         alert(response.error.message);
       } else {
-        window.location.href = "index.html";
+        //window.location.href = "index.html";
+        /* console.log(response);
+        console.log(response.data.user.id); */
+        SUPABASE.from("users")
+          .insert({
+            id: response.data.user.id,
+            name: name
+          })
+          .then((_response) => {
+            alert("Create successful");
+            window.location.href = "index.html";
+          })
+          .catch((err) => {
+            alert(err.response.text);
+          });
       }
     })
     .catch((err) => {
       alert(err);
     });
+
+  /* let user = await SUPABASE.auth.getUser();
+
+  SUPABASE.from("users")
+    .insert({
+      id: user.data.user.id,
+      name: name
+    })
+    .then((_response) => {
+      alert("Create successful");
+      window.location.href = "index.html";
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    }); */
 }
 

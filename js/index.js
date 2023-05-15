@@ -7,7 +7,6 @@ const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 document.addEventListener("DOMContentLoaded", async function (event) {
   loadLogin();
   //testZone();
-  loadCharacters();
 });
 
 async function loadLogin() {
@@ -18,11 +17,12 @@ async function loadLogin() {
       <a href="login.html" class="btn btn-primary">Login</a>
     `);
   } else {
+    let userRow = await SUPABASE.from("users").select().eq("id", user.data.user.id);
     $("#logZone").append(
       `
       Hola ` +
-        user.data.user.email +
-        `
+      userRow.data[0].name +
+      `
       <button id="logOutButton" class="btn btn-danger">Logout</button>
     `
     );
@@ -30,6 +30,17 @@ async function loadLogin() {
       <a href="createCharacter.html" class="btn btn-success">Crear personaje</a>
     `);
     $("#logOutButton").click(logOut);
+
+    console.log(userRow.data[0])
+    console.log(userRow.data[0].admin)
+    if (userRow.data[0].admin) {
+      $("#adminZone").append(`
+        <h1>Zona de admin</h1>
+        <a href="createSystem.html" class="btn btn-success">Añadir sistema</a>
+      `)
+    }
+
+    loadCharacters();
   }
 }
 
@@ -54,11 +65,11 @@ async function testZone() {
     $("#testZone").append(
       `
       User Id: ` +
-        user.data.user.id +
-        `<br>
+      user.data.user.id +
+      `<br>
       Date: ` +
-        user.data.user.created_at +
-        `
+      user.data.user.created_at +
+      `
     `
     );
   }
@@ -80,18 +91,18 @@ async function loadCharacters() {
       `
       <div class="card" style="width: 200px;">
         <a href="character.html?id=` +
-        characterRow.data[i].id +
-        `">
+      characterRow.data[i].id +
+      `">
             <div class="card-body">
                 <h5 class="card-title">` +
-        characterRow.data[i].name +
-        `</h5>
+      characterRow.data[i].name +
+      `</h5>
                 <h6 class="card-subtitle mb-2 text-muted">` +
-        new Date(characterRow.data[i].date).toLocaleDateString() +
-        `</h6>
+      new Date(characterRow.data[i].date).toLocaleDateString() +
+      `</h6>
                 <p class="card-text">` +
-        characterRow.data[i].description +
-        `</p>
+      characterRow.data[i].description +
+      `</p>
             </div>
         </a>
       </div>

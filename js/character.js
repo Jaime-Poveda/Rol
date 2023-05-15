@@ -32,34 +32,34 @@ async function loadCharacter(id) {
     `
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title text-center">` +
-      characterRow.data[0].name +
-      `</h1>
+                <h1 class="card-title text-center" id="charName">` +
+    characterRow.data[0].name +
+    `</h1>
                 <h2 class="card-subtitle mb-2 text-muted text-center">` +
-      new Date(characterRow.data[0].date).toLocaleDateString() +
-      `</h2>
+    new Date(characterRow.data[0].date).toLocaleDateString() +
+    `</h2>
                 <h5 class="card-title">Características</h5>
                 <div class="card">
                     <div class="card-body">
                         <p class="card-text d-flex flex-row"><b>Sistema:</b> &nbsp` +
-      characterRow.data[0].system +
-      `</p>
+    characterRow.data[0].system +
+    `</p>
                         <p class="card-text d-flex flex-row"><b>Descripción:</b> &nbsp` +
-      characterRow.data[0].description +
-      `</p>
+    characterRow.data[0].description +
+    `</p>
                         <p class="card-text d-flex flex-row"><b>Raza:</b> &nbsp` +
-      characterRow.data[0].race +
-      `</p>
+    characterRow.data[0].race +
+    `</p>
                         <p class="card-text d-flex flex-row"><b>Clase:</b> &nbsp` +
-      characterRow.data[0].class +
-      `</p>
+    characterRow.data[0].class +
+    `</p>
                         <p class="card-text d-flex flex-row"><b>Nivel:</b> &nbsp` +
-      characterRow.data[0].level +
-      `</p>
+    characterRow.data[0].level +
+    `</p>
                         <p class="card-text d-flex flex-row"><b>HP:</b> &nbsp` +
-      characterRow.data[0].hp +
-      `</p>
-                        <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+    characterRow.data[0].hp +
+    `</p>
+                        <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#characerInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
                     </div>
                 </div>
 
@@ -74,55 +74,58 @@ async function loadCharacter(id) {
                 <div id="skillsZone">
                     <h4>Habilidades <button id="addSkillButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button></h4>
                 </div>
+                
+                <br>
+                <button id="removeChar" type="button" data-bs-toggle="modal" data-bs-target="#removeCharModal" class="btn btn-danger">Eliminar personaje</button>
             </div>
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1">
+        <div class="modal fade" id="characerInfo" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar personaje</h1>
+                        <h1 class="modal-title fs-5" id="characerInfoLabel">Actualizar personaje</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       <input id="charId" type="hidden" class="form-control" value="` +
-      characterRow.data[0].id +
-      `">
+    characterRow.data[0].id +
+    `">
                       <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Sisema</span>
                         <input id="charSystem" type="text" class="form-control" value="` +
-      characterRow.data[0].system +
-      `">
+    characterRow.data[0].system +
+    `">
                       </div>
                       <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
                         <input id="charName" type="text" class="form-control" value="` +
-      characterRow.data[0].name +
-      `">
+    characterRow.data[0].name +
+    `">
                       </div>
                       <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Descripción</span>
                         <textarea id="charDesc" class="form-control" aria-label="With textarea">` +
-      characterRow.data[0].description +
-      `</textarea>
+    characterRow.data[0].description +
+    `</textarea>
                       </div>
                       <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Clase</span>
                         <input id="charClass" type="text" class="form-control" value="` +
-      characterRow.data[0].class +
-      `">
+    characterRow.data[0].class +
+    `">
                       </div>
                       <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Nivel</span>
                         <input id="charLevel" type="number" class="form-control" value="` +
-      characterRow.data[0].level +
-      `">
+    characterRow.data[0].level +
+    `">
                       </div>
                       <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">HP</span>
                         <input id="charHP" type="number" class="form-control" value="` +
-      characterRow.data[0].hp +
-      `">
+    characterRow.data[0].hp +
+    `">
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -344,8 +347,28 @@ async function loadCharacter(id) {
             </div>
         </div>
 
+        <div class="modal fade" id="removeCharModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Eliminar personaje</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="removeCharModalBody">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="removeCharButton" type="button" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     `
   );
+
+  $("#removeChar").click(removeCharModal);
 
   $("#updateCharacterButton").click(updateCharacter);
   $("#updateAttrButton").click(updateAttr);
@@ -363,6 +386,7 @@ async function loadCharacter(id) {
   $("#removeAttrButton").click(removeAttr);
   $("#removeItemButton").click(removeItem);
   $("#removeSkillButton").click(removeSkill);
+  $("#removeCharButton").click(removeChar);
 
   for (let i = 0; i < attributes.data.length; i++) {
     $("#attrZone").append(
@@ -371,18 +395,18 @@ async function loadCharacter(id) {
             <div class="card-body">
                 <div class="card-text d-flex flex-row">
                     <div class="attrId" hidden>` +
-        attributes.data[i].id +
-        `</div><div class="attrName fw-bold">` +
-        attributes.data[i].name +
-        `</div>&nbsp&nbsp  <i>Base:</i> &nbsp<div class="attrBase">` +
-        attributes.data[i].baseValue +
-        `</div>&nbsp&nbsp <i>Suma:</i> &nbsp<div class="attrSum">` +
-        attributes.data[i].sum +
-        `</div>&nbsp&nbsp <i>Total:</i> &nbsp<div class="attrTotal">` +
-        attributes.data[i].totalValue +
-        `</div>&nbsp&nbsp <i>Modificador:</i> &nbsp<div class="attrMod">` +
-        attributes.data[i].modifier +
-        `
+      attributes.data[i].id +
+      `</div><div class="attrName fw-bold">` +
+      attributes.data[i].name +
+      `</div>&nbsp&nbsp  <i>Base:</i> &nbsp<div class="attrBase">` +
+      attributes.data[i].baseValue +
+      `</div>&nbsp&nbsp <i>Suma:</i> &nbsp<div class="attrSum">` +
+      attributes.data[i].sum +
+      `</div>&nbsp&nbsp <i>Total:</i> &nbsp<div class="attrTotal">` +
+      attributes.data[i].totalValue +
+      `</div>&nbsp&nbsp <i>Modificador:</i> &nbsp<div class="attrMod">` +
+      attributes.data[i].modifier +
+      `
                     </div>&nbsp&nbsp
                     <button type="button" class="editAttr btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#attrModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
                     <button type="button" class="removeAttr btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeAttrModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
@@ -400,20 +424,20 @@ async function loadCharacter(id) {
         <div class="card">
             <div class="card-body">
                 <div class="itemId" hidden>` +
-        items.data[i].id +
-        `</div>
+      items.data[i].id +
+      `</div>
                 <h5 class="card-title itemName">` +
-        items.data[i].name +
-        `</h5>
+      items.data[i].name +
+      `</h5>
                 <h6 class="card-subtitle mb-2 text-muted itemDesc">` +
-        items.data[i].description +
-        `</h6>
+      items.data[i].description +
+      `</h6>
                 <div class="d-flex flex-row">Cantidad:&nbsp<div class="card-text itemAmount">` +
-        items.data[i].amount +
-        `</div></div>
+      items.data[i].amount +
+      `</div></div>
                 <div class="d-flex flex-row">Daño:&nbsp<div class="card-text itemDamage"> ` +
-        items.data[i].damage +
-        `</div></div>
+      items.data[i].damage +
+      `</div></div>
                 <button type="button" class="editItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#itemModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
                 <button type="button" class="removeItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeItemModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
             </div>
@@ -430,20 +454,20 @@ async function loadCharacter(id) {
         <div class="card">
             <div class="card-body">
                 <div class="skillId" hidden>` +
-        skills.data[i].id +
-        `</div>
+      skills.data[i].id +
+      `</div>
                 <h5 class="card-title skillName">` +
-        skills.data[i].name +
-        `</h5>
+      skills.data[i].name +
+      `</h5>
                 <div class="d-flex flex-row">Daño:&nbsp<div class="card-text skillDamage">` +
-        skills.data[i].damage +
-        `</div></div>
+      skills.data[i].damage +
+      `</div></div>
                 <h6 class="card-subtitle mb-2 text-muted skillDesc">` +
-        skills.data[i].description +
-        `</h6>
+      skills.data[i].description +
+      `</h6>
                 <div class="d-flex flex-row">Efecto:&nbsp<div class="card-text skillEffect">` +
-        skills.data[i].effect +
-        `</div></div>
+      skills.data[i].effect +
+      `</div></div>
                 <button type="button" class="editSkill btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#skillModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
                 <button type="button" class="removeSkill btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
             </div>
@@ -482,37 +506,37 @@ function editAttr(event) {
   $("#attrModalBody").append(
     `
     <input type="hidden" class="form-control attrId" value="` +
-      event.target.parentNode.parentNode.querySelector(".attrId").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".attrId").innerText +
+    `">
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Nombre</span>
     <input type="text" class="form-control attrName" value="` +
-      event.target.parentNode.parentNode.querySelector(".attrName").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".attrName").innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Valor Base</span>
     <input type="text" class="form-control attrBase" value="` +
-      event.target.parentNode.parentNode.querySelector(".attrBase").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".attrBase").innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Suma</span>
     <input type="text" class="form-control attrSum" value="` +
-      event.target.parentNode.parentNode.querySelector(".attrSum").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".attrSum").innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Total</span>
     <input type="text" class="form-control attrTotal" value="` +
-      event.target.parentNode.parentNode.querySelector(".attrTotal").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".attrTotal").innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Modificador</span>
     <input type="text" class="form-control attrMod" value="` +
-      event.target.parentNode.parentNode.querySelector(".attrMod").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".attrMod").innerText +
+    `">
   </div>
   `
   );
@@ -546,33 +570,33 @@ function editItem(event) {
   $("#itemModalBody").append(
     `
     <input type="hidden" class="form-control itemId" value="` +
-      event.target.parentNode.parentNode.querySelector(".itemId").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".itemId").innerText +
+    `">
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Nombre</span>
     <input type="text" class="form-control itemName" value="` +
-      event.target.parentNode.parentNode.querySelector(".itemName").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".itemName").innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Descripción</span>
     <input type="text" class="form-control itemDesc" value="` +
-      event.target.parentNode.parentNode.querySelector(".itemDesc").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".itemDesc").innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Cantidad</span>
     <input type="text" class="form-control itemAmount" value="` +
-      event.target.parentNode.parentNode.querySelector(".itemAmount")
-        .innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".itemAmount")
+      .innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Daño</span>
     <input type="text" class="form-control itemDamage" value="` +
-      event.target.parentNode.parentNode.querySelector(".itemDamage")
-        .innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".itemDamage")
+      .innerText +
+    `">
   </div>
   `
   );
@@ -604,33 +628,33 @@ function editSkill(event) {
   $("#skillModalBody").append(
     `
     <input type="hidden" class="form-control skillId" value="` +
-      event.target.parentNode.parentNode.querySelector(".skillId").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".skillId").innerText +
+    `">
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Nombre</span>
     <input type="text" class="form-control skillName" value="` +
-      event.target.parentNode.parentNode.querySelector(".skillName").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".skillName").innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Descripción</span>
     <input type="text" class="form-control skillDesc" value="` +
-      event.target.parentNode.parentNode.querySelector(".skillDesc").innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".skillDesc").innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Efecto</span>
     <input type="text" class="form-control skillEffect" value="` +
-      event.target.parentNode.parentNode.querySelector(".skillEffect")
-        .innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".skillEffect")
+      .innerText +
+    `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Daño</span>
     <input type="text" class="form-control skillDamage" value="` +
-      event.target.parentNode.parentNode.querySelector(".skillDamage")
-        .innerText +
-      `">
+    event.target.parentNode.parentNode.querySelector(".skillDamage")
+      .innerText +
+    `">
   </div>
   `
   );
@@ -742,18 +766,18 @@ function removeAttrModal(event) {
     
     <div class="d-flex flex-row">
         <div class="attrId" hidden>` +
-      event.target.parentNode.parentNode.querySelector(".attrId").innerText +
-      `</div><div class="attrName fw-bold">` +
-      event.target.parentNode.parentNode.querySelector(".attrName").innerText +
-      `</div>&nbsp&nbsp  <i>Base:</i> &nbsp<div class="attrBase">` +
-      event.target.parentNode.parentNode.querySelector(".attrBase").innerText +
-      `</div>&nbsp&nbsp <i>Suma:</i> &nbsp<div class="attrSum">` +
-      event.target.parentNode.parentNode.querySelector(".attrSum").innerText +
-      `</div>&nbsp&nbsp <i>Total:</i> &nbsp<div class="attrTotal">` +
-      event.target.parentNode.parentNode.querySelector(".attrTotal").innerText +
-      `</div>&nbsp&nbsp <i>Modificador:</i> &nbsp<div class="attrMod">` +
-      event.target.parentNode.parentNode.querySelector(".attrMod").innerText +
-      `
+    event.target.parentNode.parentNode.querySelector(".attrId").innerText +
+    `</div><div class="attrName fw-bold">` +
+    event.target.parentNode.parentNode.querySelector(".attrName").innerText +
+    `</div>&nbsp&nbsp  <i>Base:</i> &nbsp<div class="attrBase">` +
+    event.target.parentNode.parentNode.querySelector(".attrBase").innerText +
+    `</div>&nbsp&nbsp <i>Suma:</i> &nbsp<div class="attrSum">` +
+    event.target.parentNode.parentNode.querySelector(".attrSum").innerText +
+    `</div>&nbsp&nbsp <i>Total:</i> &nbsp<div class="attrTotal">` +
+    event.target.parentNode.parentNode.querySelector(".attrTotal").innerText +
+    `</div>&nbsp&nbsp <i>Modificador:</i> &nbsp<div class="attrMod">` +
+    event.target.parentNode.parentNode.querySelector(".attrMod").innerText +
+    `
         </div>
     </div>
   `
@@ -785,22 +809,22 @@ function removeItemModal(event) {
     
     <div class="">
         <div class="itemId" hidden="">` +
-      event.target.parentNode.parentNode.querySelector(".itemId").innerText +
-      `</div>
+    event.target.parentNode.parentNode.querySelector(".itemId").innerText +
+    `</div>
         <h5 class="card-title itemName">` +
-      event.target.parentNode.parentNode.querySelector(".itemName").innerText +
-      `</h5>
+    event.target.parentNode.parentNode.querySelector(".itemName").innerText +
+    `</h5>
         <h6 class="card-subtitle mb-2 text-muted itemDesc">` +
-      event.target.parentNode.parentNode.querySelector(".itemDesc").innerText +
-      `</h6>
+    event.target.parentNode.parentNode.querySelector(".itemDesc").innerText +
+    `</h6>
         <div class="d-flex flex-row">Cantidad:&nbsp;<div class="card-text itemAmount">` +
-      event.target.parentNode.parentNode.querySelector(".itemAmount")
-        .innerText +
-      `</div></div>
+    event.target.parentNode.parentNode.querySelector(".itemAmount")
+      .innerText +
+    `</div></div>
         <div class="d-flex flex-row">Daño:&nbsp;<div class="card-text itemDamage">` +
-      event.target.parentNode.parentNode.querySelector(".itemDamage")
-        .innerText +
-      `</div></div>
+    event.target.parentNode.parentNode.querySelector(".itemDamage")
+      .innerText +
+    `</div></div>
     </div>
   `
   );
@@ -832,19 +856,19 @@ function removeSkillModal(event) {
     <div class="">
         <div class="skillId" hidden>5</div>
         <h5 class="card-title skillName">` +
-      event.target.parentNode.parentNode.querySelector(".skillName").innerText +
-      `</h5>
+    event.target.parentNode.parentNode.querySelector(".skillName").innerText +
+    `</h5>
         <div class="d-flex flex-row">Daño:&nbsp;<div class="card-text skillDamage">` +
-      event.target.parentNode.parentNode.querySelector(".skillDamage")
-        .innerText +
-      `</div></div>
+    event.target.parentNode.parentNode.querySelector(".skillDamage")
+      .innerText +
+    `</div></div>
         <h6 class="card-subtitle mb-2 text-muted skillDesc">` +
-      event.target.parentNode.parentNode.querySelector(".skillDesc").innerText +
-      `</h6>
+    event.target.parentNode.parentNode.querySelector(".skillDesc").innerText +
+    `</h6>
         <div class="d-flex flex-row">Efecto:&nbsp;<div class="card-text skillEffect">` +
-      event.target.parentNode.parentNode.querySelector(".skillEffect")
-        .innerText +
-      `</div></div>
+    event.target.parentNode.parentNode.querySelector(".skillEffect")
+      .innerText +
+    `</div></div>
     </div>
   `
   );
@@ -860,6 +884,38 @@ function removeSkill(event) {
     .then((_response) => {
       alert("Remove successful");
       window.location.href = "character.html?id=" + $("#charId").val();
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
+}
+
+function removeCharModal(event) {
+  $("#removeCharModalBody").empty();
+
+  $("#removeCharModalBody").append(
+    `
+    <p> ¿Quieres eliminar este personaje?</p>
+    
+    <div class="">
+        <h5 class="card-title">` +
+        $("#charName")[0].innerText +
+    `   </h5>
+    </div>
+  `
+  );
+}
+
+function removeChar(event) {
+  SUPABASE.from("characters")
+    .delete()
+    .eq(
+      "id",
+      $("#charId").val()
+    )
+    .then((_response) => {
+      alert("Remove successful");
+      window.location.href = "index.html";
     })
     .catch((err) => {
       alert(err.response.text);

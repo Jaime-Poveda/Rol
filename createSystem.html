@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <title>Register</title>
+    <title>Rol</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,27 +12,20 @@
 </head>
 
 <body style="background-color: #0e0e0e;">
-
     <main class="mt-5">
         <div class="container d-flex justify-content-center" style="max-width: 500px;">
-            <form id="signUpForm" class="text-center border rounded p-3 text-light bg-dark" style="width: 100%;">
+            <form id="logInForm" class="text-center border rounded p-3 text-light bg-dark" style="width: 100%;">
                 <div class="form-group mb-2">
-                    <label for="registerEmail">Email</label>
-                    <input type="email" class="form-control" id="registerEmail" placeholder="Introduce tu email"
-                        required>
+                    <label for="loginEmail">Email</label>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="Introduce tu email" required>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="registerEmail">Nombre</label>
-                    <input type="text" class="form-control" id="registerName" placeholder="Introduce tu nombre"
-                        required>
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" required>
                 </div>
-                <div class="form-group mb-2">
-                    <label for="registerPassword">Contraseña</label>
-                    <input type="password" class="form-control" id="registerPassword" placeholder="Contraseña" required>
-                </div>
-                <button id="registerButton" class="btn btn-primary">Registrarse</button>
+                <button id="loginButton" type="submit" class="btn btn-primary">Logearse</button>
                 <div class="form-floating mt-2">
-                    Ya tienes cuenta? <a href="login.html" class="text-light"> Logearse </a>
+                    No tienes cuenta? <a href="register.html" class="text-light"> Registrarse </a>
                 </div>
 
             </form>
@@ -44,7 +37,7 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/register.js" type="module"></script>
+    <script src="js/login.js" type="module"></script>
 </body>
 
 </html>
