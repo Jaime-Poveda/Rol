@@ -9,10 +9,10 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 
 document.addEventListener("DOMContentLoaded", async function (event) {
   //console.log(params.id);
-  loadSystem(params.id);
+  loadCharacter(params.id);
 });
 
-async function loadSystem(id) {
+async function loadCharacter(id) {
   let characterRow = await SUPABASE.from("characters").select().eq("id", id);
   //console.log(characterRow);
 
@@ -99,7 +99,7 @@ async function loadSystem(id) {
                       </div>
                       <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
-                        <input id="charName" type="text" class="form-control" value="` +
+                        <input id="charNameModal" type="text" class="form-control" value="` +
     characterRow.data[0].name +
     `">
                       </div>
@@ -432,11 +432,11 @@ async function loadSystem(id) {
                 <h6 class="card-subtitle mb-2 text-muted itemDesc">` +
       items.data[i].description +
       `</h6>
-                <div class="d-flex flex-row">Cantidad:&nbsp<div class="card-text itemAmount">` +
-      items.data[i].amount +
-      `</div></div>
                 <div class="d-flex flex-row">Daño:&nbsp<div class="card-text itemDamage"> ` +
       items.data[i].damage +
+      `</div></div>
+                <div class="d-flex flex-row">Cantidad:&nbsp<div class="card-text itemAmount">` +
+      items.data[i].amount +
       `</div></div>
                 <button type="button" class="editItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#itemModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
                 <button type="button" class="removeItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeItemModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
@@ -459,12 +459,13 @@ async function loadSystem(id) {
                 <h5 class="card-title skillName">` +
       skills.data[i].name +
       `</h5>
-                <div class="d-flex flex-row">Daño:&nbsp<div class="card-text skillDamage">` +
-      skills.data[i].damage +
-      `</div></div>
                 <h6 class="card-subtitle mb-2 text-muted skillDesc">` +
       skills.data[i].description +
       `</h6>
+                <div class="d-flex flex-row">Daño:&nbsp<div class="card-text skillDamage">` +
+      skills.data[i].damage +
+      `</div></div>
+                
                 <div class="d-flex flex-row">Efecto:&nbsp<div class="card-text skillEffect">` +
       skills.data[i].effect +
       `</div></div>
@@ -480,9 +481,10 @@ async function loadSystem(id) {
 }
 
 function updateCharacter(event) {
+  console.log($("#charNameModal").val());
   SUPABASE.from("characters")
     .update({
-      name: $("#charName").val(),
+      name: $("#charNameModal").val(),
       system: $("#charSystem").val(),
       description: $("#charDesc").val(),
       race: $("#charRace").val(),
@@ -854,7 +856,7 @@ function removeSkillModal(event) {
     <p> ¿Quieres eliminar esta habilidad?</p>
     
     <div class="">
-        <div class="skillId" hidden>`+event.target.parentNode.parentNode.querySelector(".skillId").innerText+`</div>
+        <div class="skillId" hidden>`+ event.target.parentNode.parentNode.querySelector(".skillId").innerText + `</div>
         <h5 class="card-title skillName">` +
     event.target.parentNode.parentNode.querySelector(".skillName").innerText +
     `</h5>
@@ -895,13 +897,9 @@ function removeCharModal(event) {
 
   $("#removeCharModalBody").append(
     `
-    <p> ¿Quieres eliminar este personaje?</p>
-    
-    <div class="">
-        <h5 class="card-title">` +
-        $("#charName")[0].innerText +
-    `   </h5>
-    </div>
+    <p> ¿Quieres eliminar este personaje? <b> ` +
+    $("#charName")[0].innerText +
+    `</b> </p>
   `
   );
 }
