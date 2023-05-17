@@ -48,8 +48,6 @@ function deleteRule(event) {
 async function createSystem(event) {
     event.preventDefault();
 
-    console.log($("#systemName")[0].value)
-
     let systemRow = await SUPABASE.from("systems")
         .upsert({
             name: $("#systemName")[0].value ? $("#systemName")[0].value : ""
@@ -61,7 +59,7 @@ async function createSystem(event) {
     for (let i = 0; i < $(".ruleGroup").length; i++) {
         SUPABASE.from("systemRules")
             .insert({
-                systemId: systemRow.data[0].id,
+                systemName: systemRow.data[0].name,
                 title: $(".ruleGroup .ruleTitle")[i].value
                     ? $(".ruleGroup .ruleTitle")[i].value
                     : "",
@@ -78,5 +76,5 @@ async function createSystem(event) {
     }
 
     alert("System created");
-    window.location.href = "system.html?id=" + systemRow.data[0].id;
+    window.location.href = "system.html?name=" + systemRow.data[0].name;
 }

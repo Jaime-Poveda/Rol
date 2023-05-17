@@ -120,8 +120,8 @@ async function loadSystems() {
     $("#adminZone").append(
       `
       <div class="card" style="width: 200px;">
-        <a href="system.html?id=` +
-      systems.data[i].id +
+        <a href="system.html?name=` +
+      systems.data[i].name +
       `">
             <div class="card-body">
                 <h5 class="card-title">` +

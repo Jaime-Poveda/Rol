@@ -13,161 +13,242 @@
 
 <body style="background-color: #0e0e0e;">
     <main class="mt-5 mb-5">
-        <div class="container d-flex justify-content-center" style="max-width: 500px;">
-            <form id="createCharacterForm" class="text-center border rounded p-3 text-light bg-dark"
+        <div class="container d-flex justify-content-center" style="max-width: 700px;">
+            <form id="createCharacterForm" class="text-center border rounded border-secondary p-3 text-light bg-dark"
                 style="width: 100%;">
                 <h1>Crear personaje</h1>
                 <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Sistema</h3>
-                    </label>
-                    <input type="text" class="form-control" id="charSystem"
-                        placeholder="Introduce el nombre del sistema">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Nombre</span>
+                        <input id="charName" type="text" class="form-control" placeholder="Nombre">
+                    </div>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Nombre</h3>
-                    </label>
-                    <input type="text" class="form-control" id="charName"
-                        placeholder="Introduce el nombre de tu personaje">
-                </div>
-                <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Descripción</h3>
-                    </label>
-                    <input type="text" class="form-control" id="charDesc" placeholder="Introduce la descripción">
-                </div>
-                <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Raza</h3>
-                    </label>
-                    <input type="text" class="form-control" id="charRace" placeholder="Introduce la raza">
-                </div>
-                <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Clase</h3>
-                    </label>
-                    <input type="text" class="form-control" id="charClass" placeholder="Introduce la clase">
-                </div>
-                <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Nivel</h3>
-                    </label>
-                    <input type="number" class="form-control" id="charLevel" placeholder="1">
-                </div>
-                <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Puntos de vida</h3>
-                    </label>
-                    <input type="number" class="form-control" id="charHP" placeholder="1">
-                </div>
-                <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Atributos</h3>
-                    </label>
-                    <!-- <input type="text" class="form-control" id="" placeholder="Introduce el atributo"> -->
-                    <p>Nombre, Valor Base, Suma, Valor Total, Modificador</p>
-                    <button id="addBasicAttr" type="button" class="btn btn-success text-light mb-2">
-                        Insertar atributos básicos
-                    </button>
-                    <div class="input-group">
-                        <input type="text" class="form-control input-group-text text-center" id="attributeName"
-                            placeholder="Atr">
-                        <input type="number" class="form-control text-center" id="attributeBase" placeholder="0">
-                        <input type="number" class="form-control text-center" id="attributeSum" placeholder="0">
-                        <input type="number" class="form-control text-center" id="attributeTotal" placeholder="0">
-                        <input type="number" class="form-control text-center" id="attributeModifier" placeholder="0">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Sistema</span>
 
-                        <span class="input-group-text text-center p-0">
-                            <button id="addAttr" type="button" class="btn btn-light">
-                                +
+                        <input id="charSystem" type="text" class="form-control" placeholder="Sistema" list="systems">
+                        <datalist id="systems">
+                        </datalist>
+
+                        <span class="input-group-text bg-secondary m-0 p-0">
+                            <button type="button" class="btn btn-secondary" id="systemRuleModalButton"
+                                data-bs-toggle="modal" data-bs-target="#systemRuleModal" disabled>
+                                Reglas
                             </button>
                         </span>
-                    </div>
-                    <div id="attrZone" class="mt-3">
+                        <div class="modal fade text-dark" id="systemRuleModal" tabindex="-1"
+                            aria-labelledby="systemRuleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="systemRuleModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="systemRuleModalBody">
 
-                    </div>
-                </div>
-                <div class="form-group mb-2">
-                    <label for="">
-                        <h3>Habilidades</h3>
-                    </label>
-                    <!-- <input type="text" class="form-control" id="" placeholder="Introduce la habilidad"> -->
-                    <div class="input-group">
-                        <div class="" style="width: 90%;">
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Nombre</span>
-                                <input type="text" id="skillName" class="form-control rounded-0 text-center"
-                                    placeholder="Habilidad">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Daño</span>
-                                <input type="text" id="skillDamage" class="form-control rounded-0 text-center"
-                                    placeholder="0">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Descripción</span>
-                                <textarea class="form-control rounded-0 text-center" id="skillDesc"
-                                    placeholder="Descripción"></textarea>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Efecto</span>
-                                <input type="text" id="skillEffect" class="form-control rounded-0 text-center"
-                                    placeholder="Efecto">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <span class="input-group-text text-center p-0" style="width: 10%;">
-                            <button type="button" id="addSkill" class="btn btn-light"
-                                style="height: 100%; width: 100%;">
-                                +
-                            </button>
-                        </span>
+
                     </div>
-                    <div id="skillZone">
+                </div>
+                <div class="form-group mb-2">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Descripción</span>
+                        <textarea class="form-control" id="charDesc" placeholder="Introduce la descripción"></textarea>
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Raza</span>
+                        <input type="text" class="form-control" id="charRace" placeholder="Introduce la raza">
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Clase</span>
+                        <input type="text" class="form-control" id="charClass" placeholder="Introduce la clase">
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Nivel</span>
+                        <input type="text" class="form-control" id="charLevel" placeholder="1">
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Puntos de vida</span>
+                        <input type="text" class="form-control" id="charHP" placeholder="1">
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="">
+                        <h3>Atributos
+                            <button type="button" id="addAttrButton" class="btn btn-light p-0 m-0 border-0"
+                                data-bs-toggle="modal" data-bs-target="#attrModal"
+                                style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton"
+                                    style="width: 100%;"></button>
+                        </h3>
+                    </label>
+
+                    <div class="modal fade" id="attrModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content text-dark">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5">Añadir atributo</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="attrModalBody">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Nombre</span>
+                                        <input id="attrName" type="text" class="form-control" placeholder="Nombre">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Valor Base</span>
+                                        <input id="attrBase" type="number" class="form-control"
+                                            placeholder="Valor Base">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Suma</span>
+                                        <input id="attrSum" type="number" class="form-control" placeholder="Suma">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Total</span>
+                                        <input id="attrTotal" type="number" class="form-control" placeholder="Total">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Modificador</span>
+                                        <input id="attrModifier" type="number" class="form-control"
+                                            placeholder="Modificador">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button id="addAttr" type="button" class="btn btn-success">Crear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="attrZone" class="d-flex flex-column justify-content-center align-items-center">
 
                     </div>
                 </div>
                 <div class="form-group mb-2">
                     <label for="">
-                        <h3>Equipo</h3>
+                        <h3>Habilidades
+                            <button type="button" id="addSkillButton" class="btn btn-light p-0 m-0 border-0"
+                                data-bs-toggle="modal" data-bs-target="#skillModal"
+                                style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton"
+                                    style="width: 100%;"></button>
+                        </h3>
                     </label>
-                    <!-- <input type="text" class="form-control" id="" placeholder="Introduce el equipo"> -->
-                    <div class="input-group">
-                        <div class="" style="width: 90%;">
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Nombre</span>
-                                <input type="text" id="itemName" class="form-control rounded-0 text-center"
-                                    placeholder="Item">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Cantidad</span>
-                                <input type="number" id="itemAmount" class="form-control rounded-0 text-center"
-                                    placeholder="0" value="1">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Descripción</span>
-                                <textarea class="form-control rounded-0 text-center" id="itemDesc"
-                                    placeholder="Descripción"></textarea>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="width: 100px;">Daño</span>
-                                <input type="text" id="itemDamage" class="form-control rounded-0 text-center"
-                                    placeholder="0">
+
+                    <div class="modal fade" id="skillModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content text-dark">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5">Añadir habilidad</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="skillModalBody">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Nombre</span>
+                                        <input id="skillName" type="text" class="form-control" placeholder="Nombre">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Descripción</span>
+                                        <input id="skillDesc" type="text" class="form-control"
+                                            placeholder="Descripción">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Daño</span>
+                                        <input id="skillDamage" type="text" class="form-control" placeholder="Daño">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Efecto</span>
+                                        <input id="skillEffect" type="text" class="form-control" placeholder="Efecto">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button id="addSkill" type="button" class="btn btn-success">Crear</button>
+                                </div>
                             </div>
                         </div>
-                        <span class="input-group-text text-center p-0" style="width: 10%;">
-                            <button type="button" id="addItem" class="btn btn-light" style="height: 100%; width: 100%;">
-                                +
-                            </button>
-                        </span>
                     </div>
-                    <div id="itemZone">
+
+                    <div id="skillZone" class="d-flex flex-column justify-content-center align-items-center">
 
                     </div>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="">
+                        <h3>Equipo
+                            <button type="button" id="addItemButton" class="btn btn-light p-0 m-0 border-0"
+                                data-bs-toggle="modal" data-bs-target="#itemModal"
+                                style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton"
+                                    style="width: 100%;"></button>
+                        </h3>
+                    </label>
+
+                    <div class="modal fade" id="itemModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content text-dark">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5">Añadir objeto</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="itemModalBody">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Nombre</span>
+                                        <input id="itemName" type="text" class="form-control" placeholder="Nombre">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Descripción</span>
+                                        <input id="itemDesc" type="text" class="form-control"
+                                            placeholder="Descripción">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Daño</span>
+                                        <input id="itemDamage" type="text" class="form-control" placeholder="Daño">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Cantidad</span>
+                                        <input id="itemAmount" type="number" class="form-control" placeholder="Cantidad">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button id="addItem" type="button" class="btn btn-success">Crear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="itemZone" class="d-flex flex-column justify-content-center align-items-center">
+
+                    </div>
+
                 </div>
                 <button id="createCharacterButton" type="submit" class="btn btn-primary">Crear personaje</button>
             </form>
         </div>
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

@@ -9,16 +9,16 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 
 document.addEventListener("DOMContentLoaded", async function (event) {
     //console.log(params.id);
-    loadSystem(params.id);
+    loadSystem(params.name);
 });
 
-async function loadSystem(id) {
-    let systemRow = await SUPABASE.from("systems").select().eq("id", id);
+async function loadSystem(name) {
+    let systemRow = await SUPABASE.from("systems").select().eq("name", name);
     //console.log(systemacterRow);
 
     let rules = await SUPABASE.from("systemRules")
         .select()
-        .eq("systemId", systemRow.data[0].id);
+        .eq("systemName", systemRow.data[0].name);
 
     //console.log(rules);
 
@@ -28,7 +28,7 @@ async function loadSystem(id) {
             <div class="card-body">
                 <h1 class="card-title text-center">` +
         systemRow.data[0].name +
-        ` <button id="editSystemButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#systemInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button></h1>
+        ` </h1>
                 
                 <div id="rulesZone">
                     <h4 class="card-title">Reglas <button id="addRuleButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createRuleModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button></h4>
@@ -42,8 +42,8 @@ async function loadSystem(id) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                              <input id="systemId" type="hidden" class="form-control" value="` +
-        systemRow.data[0].id +
+                              <input id="systemName" type="hidden" class="form-control" value="` +
+        systemRow.data[0].name +
         `">
                               <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Nombre</span>
@@ -126,7 +126,7 @@ async function loadSystem(id) {
         `
     );
     $("#addRuleButton").click(emptyModal);
-    $("#updateSystemButton").click(updateSystem);
+    /* $("#updateSystemButton").click(updateSystem); */
 
     $("#createRuleButton").click(createRule);
     $("#updateRuleButton").click(updateRule);
@@ -222,10 +222,11 @@ function updateSystem(event) {
         .update({
             name: $("#systemName").val(),
         })
-        .eq("id", $("#systemId").val())
+        .eq("name", $("#systemName").val())
         .then((_response) => {
+            console.log(_response)
             alert("Update successful");
-            window.location.href = "system.html?id=" + $("#systemId").val();
+            window.location.href = "system.html?name=" + $("#systemName").val();
         })
         .catch((err) => {
             alert(err.response.text);
@@ -233,15 +234,17 @@ function updateSystem(event) {
 }
 
 function createRule(event) {
+    console.log($("#systemName").val());
+
     SUPABASE.from("systemRules")
         .insert({
-            systemId: $("#systemId").val(),
+            systemName: $("#systemName").val(),
             title: event.target.parentNode.parentNode.querySelector(".ruleName").value,
             desc: event.target.parentNode.parentNode.querySelector(".ruleDesc").value,
         })
         .then((_response) => {
             alert("Create successful");
-            window.location.href = "system.html?id=" + $("#systemId").val();
+            window.location.href = "system.html?name=" + $("#systemName").val();
         })
         .catch((err) => {
             alert(err.response.text);
@@ -258,7 +261,7 @@ function updateRule(event) {
         )
         .then((_response) => {
             alert("Update successful");
-            window.location.href = "system.html?id=" + $("#systemId").val();
+            window.location.href = "system.html?name=" + $("#systemName").val();
         })
         .catch((err) => {
             alert(err.response.text);
@@ -273,7 +276,7 @@ function removeRule(event) {
         )
         .then((_response) => {
             alert("Remove successful");
-            window.location.href = "system.html?id=" + $("#systemId").val();
+            window.location.href = "system.html?name=" + $("#systemName").val();
         })
         .catch((err) => {
             alert(err.response.text);

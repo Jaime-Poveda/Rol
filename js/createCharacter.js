@@ -5,14 +5,187 @@ const SUPABASE_KEY =
 const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 document.addEventListener("DOMContentLoaded", async function (event) {
-  $("#createCharacterForm").submit(createCharacter);
-  $("#addBasicAttr").click(addBasicAttributes);
+  loadSystems();
+  $("#charSystem").change(systemRules);
+
+  $("#addAttrButton").click(emptyModal);
   $("#addAttr").click(addAttribute);
-  $("#addItem").click(addItem);
+
+  $("#addSkillButton").click(emptyModal);
   $("#addSkill").click(addSkill);
+  
+  $("#addItemButton").click(emptyModal);
+  $("#addItem").click(addItem);
+
+  $("#createCharacterForm").submit(createCharacter);
+  //$("#addBasicAttr").click(addBasicAttributes);
+  //$("#addAttr").click(addAttribute);
+  //$("#addItem").click(addItem);
+  //$("#addSkill").click(addSkill);
 });
 
-function addBasicAttributes(event) {
+async function loadSystems() {
+  let systems = await SUPABASE.from("systems")
+    .select();
+
+  //console.log(characterRow);
+  for (let i = 0; i < systems.data.length; i++) {
+    //console.log(characterRow.data[i]);
+    $("#systems").append(
+      `
+      <option>`+
+      systems.data[i].name +
+      `
+      </option>
+    `
+    );
+  }
+}
+
+async function systemRules() {
+  let rules = await SUPABASE.from("systemRules")
+    .select()
+    .eq("systemName", $("#charSystem").val());
+
+  if (rules.data.length > 0) {
+    $("#systemRuleModalButton").attr("disabled", false);
+    writeSystemModal(rules);
+  } else {
+    $("#systemRuleModalButton").attr("disabled", true);
+  }
+}
+
+function writeSystemModal(rules) {
+  $("#systemRuleModalLabel").text(rules.data[0].systemName);
+  $("#systemRuleModalBody").empty();
+
+  for (let i = 0; i < rules.data.length; i++) {
+    $("#systemRuleModalBody").append(`
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">`+ rules.data[i].title + `</h5>
+          <h6 class="card-subtitle mb-2 text-muted">`+ rules.data[i].desc + `</h6>
+        </div>
+      </div>
+    `)
+  }
+}
+
+function emptyModal(event) {
+  $(event.target.parentNode.getAttribute("data-bs-target") + " input").each(
+    function () {
+      this.value = "";
+    }
+  );
+  $(event.target.parentNode.getAttribute("data-bs-target") + " textarea").each(
+    function () {
+      this.value = "";
+    }
+  );
+}
+
+function addAttribute(event) {
+  $("#attrZone").append(
+    `
+      <div class="card" style="width: 18rem;">
+        <div class="card-body attrGroup">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Nombre</span>
+            <input type="text" class="form-control attrName" placeholder="Nombre" value="`+ event.target.parentNode.parentNode.querySelector("#attrName").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Valor Base</span>
+            <input type="number" class="form-control attrBase" placeholder="Valor Base" value="`+ event.target.parentNode.parentNode.querySelector("#attrBase").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Suma</span>
+            <input type="number" class="form-control attrSum" placeholder="Suma" value="`+ event.target.parentNode.parentNode.querySelector("#attrSum").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Total</span>
+            <input type="number" class="form-control attrTotal" placeholder="Total" value="`+ event.target.parentNode.parentNode.querySelector("#attrTotal").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Modificador</span>
+            <input type="number" class="form-control attrModifier" placeholder="Modificador" value="`+ event.target.parentNode.parentNode.querySelector("#attrModifier").value + `">
+          </div>
+          <button type="button" class="btn p-0 m-0 border-0 mt-2 delete" style="width: 25px; height: 25px;"><img src="img/icons/remove.png"
+          alt="DeleteButton" style="width: 100%;"></button>
+        </div>
+      </div>
+  `
+  )
+  $(".delete").click(deleteCard);
+  $("#attrModal").modal("hide");
+}
+
+function deleteCard(event) {
+  event.target.parentNode.parentNode.parentNode.remove();
+}
+
+function addSkill(event) {
+  $("#skillZone").append(
+    `
+      <div class="card" style="width: 18rem;">
+        <div class="card-body skillGroup">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Nombre</span>
+            <input type="text" class="form-control skillName" placeholder="Nombre" value="`+ event.target.parentNode.parentNode.querySelector("#skillName").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Descripción</span>
+            <input type="text" class="form-control skillDesc" placeholder="Descripción" value="`+ event.target.parentNode.parentNode.querySelector("#skillDesc").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Daño</span>
+            <input type="text" class="form-control skillDamage" placeholder="Daño" value="`+ event.target.parentNode.parentNode.querySelector("#skillDamage").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Efecto</span>
+            <input type="text" class="form-control skillEffect" placeholder="Efecto" value="`+ event.target.parentNode.parentNode.querySelector("#skillEffect").value + `">
+          </div>
+          <button type="button" class="btn p-0 m-0 border-0 mt-2 delete" style="width: 25px; height: 25px;"><img src="img/icons/remove.png"
+          alt="DeleteButton" style="width: 100%;"></button>
+        </div>
+      </div>
+  `
+  )
+  $(".delete").click(deleteCard);
+  $("#skillModal").modal("hide");
+}
+
+function addItem(event) {
+  $("#itemZone").append(
+    `
+      <div class="card" style="width: 18rem;">
+        <div class="card-body itemGroup">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Nombre</span>
+            <input type="text" class="form-control itemName" placeholder="Nombre" value="`+ event.target.parentNode.parentNode.querySelector("#itemName").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Descripción</span>
+            <input type="text" class="form-control itemDesc" placeholder="Descripción" value="`+ event.target.parentNode.parentNode.querySelector("#itemDesc").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Daño</span>
+            <input type="text" class="form-control itemDamage" placeholder="Daño" value="`+ event.target.parentNode.parentNode.querySelector("#itemDamage").value + `">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Cantidad</span>
+            <input type="text" class="form-control itemAmount" placeholder="Cantidad" value="`+ event.target.parentNode.parentNode.querySelector("#itemAmount").value + `">
+          </div>
+          <button type="button" class="btn p-0 m-0 border-0 mt-2 delete" style="width: 25px; height: 25px;"><img src="img/icons/remove.png"
+          alt="DeleteButton" style="width: 100%;"></button>
+        </div>
+      </div>
+  `
+  )
+  $(".delete").click(deleteCard);
+  $("#itemModal").modal("hide");
+}
+
+/* function addBasicAttributes(event) {
   event.target.remove();
   $("#attrZone").append(`
       <div class="input-group attrGroup">
@@ -110,25 +283,25 @@ function addBasicAttributes(event) {
   $(".btnDelete").click(deleteElement);
 }
 
-function addAttribute(event) {
+function addAttribute2(event) {
   $("#attrZone").append(
     `
     <div class="input-group mt-2 attrGroup">
       <input type="text" class="form-control input-group-text text-center attrName" placeholder="Atr" value="` +
-      $("#attributeName")[0].value +
-      `">
+    $("#attributeName")[0].value +
+    `">
       <input type="number" class="form-control text-center attrBase" placeholder="0" value="` +
-      $("#attributeBase")[0].value +
-      `">
+    $("#attributeBase")[0].value +
+    `">
       <input type="number" class="form-control text-center attrSum" placeholder="0" value="` +
-      $("#attributeSum")[0].value +
-      `">
+    $("#attributeSum")[0].value +
+    `">
       <input type="number" class="form-control text-center attrTotal" placeholder="0" value="` +
-      $("#attributeTotal")[0].value +
-      `">
+    $("#attributeTotal")[0].value +
+    `">
       <input type="number" class="form-control text-center attrModifier" placeholder="0" value="` +
-      $("#attributeModifier")[0].value +
-      `">
+    $("#attributeModifier")[0].value +
+    `">
   
       <span class="input-group-text text-center p-0">
           <button type="button" class="btn btn-light btnDelete">
@@ -140,8 +313,8 @@ function addAttribute(event) {
   );
 
   $(".btnDelete").click(deleteElement);
-}
-
+} */
+/* 
 function addSkill(event) {
   $("#skillZone").append(
     `
@@ -150,26 +323,26 @@ function addSkill(event) {
               <div class="input-group">
                   <span class="input-group-text" style="width: 100px;">Nombre</span>
                   <input type="text" class="form-control rounded-0 text-center skillName" placeholder="Habilidad" value="` +
-      $("#skillName")[0].value +
-      `">
+    $("#skillName")[0].value +
+    `">
               </div>
               <div class="input-group">
                   <span class="input-group-text" style="width: 100px;">Descripción</span>
                   <textarea class="form-control rounded-0 text-center skillDesc" placeholder="Descripción">` +
-      $("#skillDesc")[0].value +
-      `</textarea>
+    $("#skillDesc")[0].value +
+    `</textarea>
               </div>
               <div class="input-group">
                   <span class="input-group-text" style="width: 100px;">Daño</span>
                   <input type="text" class="form-control rounded-0 text-center skillDamage" placeholder="0" value="` +
-      $("#skillDamage")[0].value +
-      `">
+    $("#skillDamage")[0].value +
+    `">
               </div>
               <div class="input-group">
                   <span class="input-group-text" style="width: 100px;">Efecto</span>
                   <input type="text" class="form-control rounded-0 text-center skillEffect" placeholder="Efecto" value="` +
-      $("#skillEffect")[0].value +
-      `">
+    $("#skillEffect")[0].value +
+    `">
               </div>
           </div>
           <span class="input-group-text text-center p-0" style="width: 10%;">
@@ -192,26 +365,26 @@ function addItem(event) {
               <div class="input-group">
                   <span class="input-group-text" style="width: 100px;">Nombre</span>
                   <input type="text" class="form-control rounded-0 text-center itemName" placeholder="Item" value="` +
-      $("#itemName")[0].value +
-      `">
+    $("#itemName")[0].value +
+    `">
         <div class="input-group">
             <span class="input-group-text" style="width: 100px;">Cantidad</span>
             <input type="number" class="form-control rounded-0 text-center itemAmount" placeholder="0"  value="` +
-      $("#itemAmount")[0].value +
-      `">
+    $("#itemAmount")[0].value +
+    `">
               </div>
               <div class="input-group">
                   <span class="input-group-text" style="width: 100px;">Descripción</span>
                   <textarea class="form-control rounded-0 text-center itemDesc" placeholder="Descripción">` +
-      $("#itemDesc")[0].value +
-      `</textarea>
+    $("#itemDesc")[0].value +
+    `</textarea>
               </div>
               </div>
               <div class="input-group">
                   <span class="input-group-text" style="width: 100px;">Daño</span>
                   <input type="text" class="form-control rounded-0 text-center itemDamage" placeholder="0"  value="` +
-      $("#itemDamage")[0].value +
-      `">
+    $("#itemDamage")[0].value +
+    `">
               </div>
           </div>
           <span class="input-group-text text-center p-0" style="width: 10%;">
@@ -224,7 +397,7 @@ function addItem(event) {
   );
 
   $(".btnDelete").click(deleteElement);
-}
+} */
 
 function deleteElement(event) {
   event.target.parentElement.parentElement.remove();
