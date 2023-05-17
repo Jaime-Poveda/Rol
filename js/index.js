@@ -31,13 +31,12 @@ async function loadLogin() {
     `);
     $("#logOutButton").click(logOut);
 
-    console.log(userRow.data[0])
-    console.log(userRow.data[0].admin)
     if (userRow.data[0].admin) {
       $("#adminZone").append(`
         <h1>Zona de admin</h1>
         <a href="createSystem.html" class="btn btn-success">Añadir sistema</a>
       `)
+      loadSystems();
     }
 
     loadCharacters();
@@ -103,6 +102,31 @@ async function loadCharacters() {
                 <p class="card-text">` +
       characterRow.data[i].description +
       `</p>
+            </div>
+        </a>
+      </div>
+    `
+    );
+  }
+}
+
+async function loadSystems() {
+  let systems = await SUPABASE.from("systems")
+    .select();
+
+  //console.log(characterRow);
+  for (let i = 0; i < systems.data.length; i++) {
+    //console.log(characterRow.data[i]);
+    $("#adminZone").append(
+      `
+      <div class="card" style="width: 200px;">
+        <a href="system.html?id=` +
+      systems.data[i].id +
+      `">
+            <div class="card-body">
+                <h5 class="card-title">` +
+      systems.data[i].name +
+      `</h5>
             </div>
         </a>
       </div>

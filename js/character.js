@@ -9,10 +9,10 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 
 document.addEventListener("DOMContentLoaded", async function (event) {
   //console.log(params.id);
-  loadCharacter(params.id);
+  loadSystem(params.id);
 });
 
-async function loadCharacter(id) {
+async function loadSystem(id) {
   let characterRow = await SUPABASE.from("characters").select().eq("id", id);
   //console.log(characterRow);
 
@@ -854,7 +854,7 @@ function removeSkillModal(event) {
     <p> ¿Quieres eliminar esta habilidad?</p>
     
     <div class="">
-        <div class="skillId" hidden>5</div>
+        <div class="skillId" hidden>`+event.target.parentNode.parentNode.querySelector(".skillId").innerText+`</div>
         <h5 class="card-title skillName">` +
     event.target.parentNode.parentNode.querySelector(".skillName").innerText +
     `</h5>

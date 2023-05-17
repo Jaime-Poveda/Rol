@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <title>Rol</title>
+    <title>Crear Sistema</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,20 +14,53 @@
 <body style="background-color: #0e0e0e;">
     <main class="mt-5">
         <div class="container d-flex justify-content-center" style="max-width: 500px;">
-            <form id="logInForm" class="text-center border rounded p-3 text-light bg-dark" style="width: 100%;">
+            <form id="logInForm" class="text-center border rounded p-3 bg-light" style="width: 100%;">
+                <h1>Nuevo sistema</h1>
                 <div class="form-group mb-2">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" class="form-control" id="loginEmail" placeholder="Introduce tu email" required>
-                </div>
-                <div class="form-group mb-2">
-                    <label for="loginPassword">Contraseña</label>
-                    <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" required>
-                </div>
-                <button id="loginButton" type="submit" class="btn btn-primary">Logearse</button>
-                <div class="form-floating mt-2">
-                    No tienes cuenta? <a href="register.html" class="text-light"> Registrarse </a>
+                    <label for="loginEmail">
+                        <h4>Nombre</h4>
+                    </label>
+                    <input type="text" class="form-control text-center" id="systemName" placeholder="Introduce el nombre" required>
                 </div>
 
+                <div class="d-flex flex-row justify-content-center">
+                    <h4 class="me-2">Reglas</h4>
+                    <button type="button" id="addRuleButton" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal"
+                        data-bs-target="#ruleModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png"
+                            alt="AddButton" style="width: 100%;"></button>
+                </div>
+
+                <div id="rulesZone" class="d-flex flex-column justify-content-center align-items-center mb-3">
+
+                </div>
+
+                <div class="modal fade" id="ruleModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content text-dark">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5">Añadir regla</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="ruleModalBody">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Título</span>
+                                    <input id="ruleTitle" type="text" class="form-control" placeholder="Título">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    <textarea id="ruleDesc" class="form-control" placeholder="Descripción" id="floatingTextarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button id="addRule" type="button" class="btn btn-success">Crear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="createButton" type="submit" class="btn btn-success">Crear sistema</button>
             </form>
         </div>
     </main>
@@ -37,7 +70,7 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/login.js" type="module"></script>
+    <script src="js/createSystem.js" type="module"></script>
 </body>
 
 </html>
