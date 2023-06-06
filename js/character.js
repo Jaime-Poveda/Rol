@@ -9,8 +9,58 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 
 document.addEventListener("DOMContentLoaded", async function (event) {
   //console.log(params.id);
+  loadLogin();
   loadCharacter(params.id);
 });
+
+async function loadLogin() {
+  let user = await SUPABASE.auth.getUser();
+
+  if (user.data.user === null) {
+    $("#logZone").append(`
+      <a href="login.html" class="btn btn-primary">Login</a>
+      <a href="register.html" class="btn btn-primary">Register</a>
+    `);
+  } else {
+    let userRow = await SUPABASE.from("users").select().eq("id", user.data.user.id);
+
+    $(".navbar-nav").append(`
+      <li class="nav-item" >
+        <a class="nav-link active" href="createCharacter.html">Crear personaje</a>
+      </li >
+      `
+    )
+
+    $("#logZone").append(
+      `
+      Hola ` +
+      userRow.data[0].name +
+      `
+      <button id="logOutButton" class="btn btn-danger">Logout</button>
+    `
+    );
+    $("#logOutButton").click(logOut);
+
+    if (userRow.data[0].admin) {
+      $(".navbar-nav").append(`
+        <a href="createSystem.html" class="nav-link active">Añadir sistema</a>
+      `)
+    }
+  }
+}
+function logOut(event) {
+  event.preventDefault();
+
+  SUPABASE.auth
+    .signOut()
+    .then((_response) => {
+      alert("Logout successful");
+      window.location.href = "index.html";
+    })
+    .catch((err) => {
+      alert(err.response.text);
+    });
+}
 
 async function loadCharacter(id) {
   let characterRow = await SUPABASE.from("characters").select().eq("id", id);
@@ -18,48 +68,51 @@ async function loadCharacter(id) {
 
   let attributes = await SUPABASE.from("attributes")
     .select()
-    .eq("characterId", characterRow.data[0].id);
+    .eq("characterId", characterRow.data[0].id)
+    .order("id", { ascending: true });
 
   let items = await SUPABASE.from("items")
     .select()
-    .eq("characterId", characterRow.data[0].id);
+    .eq("characterId", characterRow.data[0].id)
+    .order("id", { ascending: true });
 
   let skills = await SUPABASE.from("skills")
     .select()
-    .eq("characterId", characterRow.data[0].id);
+    .eq("characterId", characterRow.data[0].id)
+    .order("id", { ascending: true });
 
   $("#characterZone").append(
     `
         <div class="card">
-            <div class="card-body">
-                <h1 class="card-title text-center" id="charName">` +
+            <div class="card-body text-center grid justify-content-center align-items-center">
+                <h1 class="card-title" id="charName">` +
     characterRow.data[0].name +
     `</h1>
-                <h2 class="card-subtitle mb-2 text-muted text-center">` +
+                <h2 class="card-subtitle mb-2 text-muted">` +
     new Date(characterRow.data[0].date).toLocaleDateString() +
     `</h2>
-                <h5 class="card-title">Características</h5>
+                <h5 class="card-title">Características 
+                <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#characerInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button></h5>
                 <div class="card">
-                    <div class="card-body">
-                        <p class="card-text d-flex flex-row"><b>Sistema:</b> &nbsp` +
+                    <div class="card-body row row-cols-2 justify-content-center align-items-center">
+                        <div class="card-text d-flex flex-row"><b>Sistema:</b> &nbsp` +
     characterRow.data[0].system +
-    `</p>
-                        <p class="card-text d-flex flex-row"><b>Descripción:</b> &nbsp` +
+    `</div>
+                        <div class="card-text d-flex flex-row"><b>Descripción:</b> &nbsp` +
     characterRow.data[0].description +
-    `</p>
-                        <p class="card-text d-flex flex-row"><b>Raza:</b> &nbsp` +
+    `</div>
+                        <div class="card-text d-flex flex-row"><b>Raza:</b> &nbsp` +
     characterRow.data[0].race +
-    `</p>
-                        <p class="card-text d-flex flex-row"><b>Clase:</b> &nbsp` +
+    `</div>
+                        <div class="card-text d-flex flex-row"><b>Clase:</b> &nbsp` +
     characterRow.data[0].class +
-    `</p>
-                        <p class="card-text d-flex flex-row"><b>Nivel:</b> &nbsp` +
+    `</div>
+                        <div class="card-text d-flex flex-row"><b>Nivel:</b> &nbsp` +
     characterRow.data[0].level +
-    `</p>
-                        <p class="card-text d-flex flex-row"><b>HP:</b> &nbsp` +
+    `</div>
+                        <div class="card-text d-flex flex-row"><b>HP:</b> &nbsp` +
     characterRow.data[0].hp +
-    `</p>
-                        <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#characerInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+    `</div>
                     </div>
                 </div>
 
@@ -91,37 +144,43 @@ async function loadCharacter(id) {
                       <input id="charId" type="hidden" class="form-control" value="` +
     characterRow.data[0].id +
     `">
-                      <div class="input-group mb-3">
+                      <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Sisema</span>
                         <input id="charSystem" type="text" class="form-control" value="` +
     characterRow.data[0].system +
     `">
                       </div>
-                      <div class="input-group mb-3">
+                      <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
                         <input id="charNameModal" type="text" class="form-control" value="` +
     characterRow.data[0].name +
     `">
                       </div>
-                      <div class="input-group mb-3">
+                      <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Descripción</span>
                         <textarea id="charDesc" class="form-control" aria-label="With textarea">` +
     characterRow.data[0].description +
     `</textarea>
                       </div>
-                      <div class="input-group mb-3">
+                      <div class="input-group mb-1">
+                        <span class="input-group-text" id="basic-addon1">Raza</span>
+                        <input id="charRace" type="text" class="form-control" value="` +
+    characterRow.data[0].race +
+    `">
+                      </div>
+                      <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Clase</span>
                         <input id="charClass" type="text" class="form-control" value="` +
     characterRow.data[0].class +
     `">
                       </div>
-                      <div class="input-group mb-3">
+                      <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Nivel</span>
                         <input id="charLevel" type="number" class="form-control" value="` +
     characterRow.data[0].level +
     `">
                       </div>
-                      <div class="input-group mb-3">
+                      <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">HP</span>
                         <input id="charHP" type="number" class="form-control" value="` +
     characterRow.data[0].hp +

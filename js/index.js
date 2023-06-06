@@ -6,7 +6,6 @@ const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 document.addEventListener("DOMContentLoaded", async function (event) {
   loadLogin();
-  //testZone();
 });
 
 async function loadLogin() {
@@ -15,9 +14,18 @@ async function loadLogin() {
   if (user.data.user === null) {
     $("#logZone").append(`
       <a href="login.html" class="btn btn-primary">Login</a>
+      <a href="register.html" class="btn btn-primary">Register</a>
     `);
   } else {
     let userRow = await SUPABASE.from("users").select().eq("id", user.data.user.id);
+
+    $(".navbar-nav").append(`
+      <li class="nav-item" >
+        <a class="nav-link active" href="createCharacter.html">Crear personaje</a>
+      </li >
+      `
+    )
+
     $("#logZone").append(
       `
       Hola ` +
@@ -26,15 +34,14 @@ async function loadLogin() {
       <button id="logOutButton" class="btn btn-danger">Logout</button>
     `
     );
-    $("#characters").append(`
-      <a href="createCharacter.html" class="btn btn-success">Crear personaje</a>
-    `);
     $("#logOutButton").click(logOut);
 
     if (userRow.data[0].admin) {
+      $(".navbar-nav").append(`
+        <a href="createSystem.html" class="nav-link active">Añadir sistema</a>
+      `)
       $("#adminZone").append(`
         <h1>Zona de admin</h1>
-        <a href="createSystem.html" class="btn btn-success">Añadir sistema</a>
       `)
       loadSystems();
     }
@@ -57,23 +64,6 @@ function logOut(event) {
     });
 }
 
-async function testZone() {
-  let user = await SUPABASE.auth.getUser();
-
-  if (user.data.user !== null) {
-    $("#testZone").append(
-      `
-      User Id: ` +
-      user.data.user.id +
-      `<br>
-      Date: ` +
-      user.data.user.created_at +
-      `
-    `
-    );
-  }
-}
-
 async function loadCharacters() {
   let user = await SUPABASE.auth.getUser();
 
@@ -81,17 +71,19 @@ async function loadCharacters() {
 
   let characterRow = await SUPABASE.from("characters")
     .select()
-    .eq("userId", user.data.user.id);
+    .eq("userId", user.data.user.id)
+    .order("date", { ascending: false });
 
   //console.log(characterRow);
   for (let i = 0; i < characterRow.data.length; i++) {
     //console.log(characterRow.data[i]);
     $("#charactersZone").append(
       `
-      <div class="card" style="width: 200px;">
-        <a href="character.html?id=` +
+      <div class="card m-2 p-1 text-center" style="width: 200px;">
+        <a class="text-decoration-none" href="character.html?id=` +
       characterRow.data[i].id +
       `">
+            <img src="../img/placeholder.jpg" class="card-img-top" alt="Character Image">
             <div class="card-body">
                 <h5 class="card-title">` +
       characterRow.data[i].name +
@@ -119,8 +111,8 @@ async function loadSystems() {
     //console.log(characterRow.data[i]);
     $("#adminZone").append(
       `
-      <div class="card" style="width: 200px;">
-        <a href="system.html?name=` +
+      <div class="card m-2" style="width: 200px;">
+        <a class="text-decoration-none" href="system.html?name=` +
       systems.data[i].name +
       `">
             <div class="card-body">

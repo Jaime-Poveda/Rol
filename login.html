@@ -12,8 +12,28 @@
 </head>
 
 <body style="background-color: #0e0e0e;">
-    <main class="mt-5">
-        <div class="container d-flex justify-content-center" style="max-width: 500px;">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">One Role</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavBar"
+                aria-controls="myNavBar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="myNavBar">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="createCharacter.html">Crear personaje</a>
+                    </li>
+                </ul>
+                <div id="logZone">
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="container d-flex justify-content-center align-items-center mt-5" style="max-width: 500px;">
             <form id="logInForm" class="text-center border rounded p-3 text-light bg-dark" style="width: 100%;">
                 <div class="form-group mb-2">
                     <label for="loginEmail">Email</label>
@@ -23,10 +43,10 @@
                     <label for="loginPassword">Contraseña</label>
                     <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" required>
                 </div>
-                <button id="loginButton" type="submit" class="btn btn-primary">Logearse</button>
-                <div class="form-floating mt-2">
+                <div class="form-floating m-2">
                     No tienes cuenta? <a href="register.html" class="text-light"> Registrarse </a>
                 </div>
+                <button id="loginButton" type="submit" class="btn btn-primary">Logearse</button>
 
             </form>
         </div>

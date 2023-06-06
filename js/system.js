@@ -8,9 +8,58 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 });
 
 document.addEventListener("DOMContentLoaded", async function (event) {
+    loadLogin();
     //console.log(params.id);
     loadSystem(params.name);
 });
+
+async function loadLogin() {
+    let user = await SUPABASE.auth.getUser();
+
+    if (user.data.user === null) {
+        $("#logZone").append(`
+        <a href="login.html" class="btn btn-primary">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      `);
+    } else {
+        let userRow = await SUPABASE.from("users").select().eq("id", user.data.user.id);
+
+        $(".navbar-nav").append(`
+            <li class="nav-item" >
+              <a class="nav-link active" href="createCharacter.html">Crear personaje</a>
+            </li >
+            `)
+
+        $("#logZone").append(
+            `
+        Hola ` +
+            userRow.data[0].name +
+            `
+        <button id="logOutButton" class="btn btn-danger">Logout</button>
+      `
+        );
+        $("#logOutButton").click(logOut);
+
+        if (userRow.data[0].admin) {
+            $(".navbar-nav").append(`
+          <a href="createSystem.html" class="nav-link active">Añadir sistema</a>
+        `)
+        }
+    }
+}
+function logOut(event) {
+    event.preventDefault();
+
+    SUPABASE.auth
+        .signOut()
+        .then((_response) => {
+            alert("Logout successful");
+            window.location.href = "index.html";
+        })
+        .catch((err) => {
+            alert(err.response.text);
+        });
+}
 
 async function loadSystem(name) {
     let systemRow = await SUPABASE.from("systems").select().eq("name", name);

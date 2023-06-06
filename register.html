@@ -12,9 +12,29 @@
 </head>
 
 <body style="background-color: #0e0e0e;">
+    <main>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">One Role</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavBar"
+                    aria-controls="myNavBar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <main class="mt-5">
-        <div class="container d-flex justify-content-center" style="max-width: 500px;">
+                <div class="collapse navbar-collapse" id="myNavBar">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="createCharacter.html">Crear personaje</a>
+                        </li>
+                    </ul>
+                    <div id="logZone">
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container d-flex justify-content-center mt-5" style="max-width: 500px;">
             <form id="signUpForm" class="text-center border rounded p-3 text-light bg-dark" style="width: 100%;">
                 <div class="form-group mb-2">
                     <label for="registerEmail">Email</label>
@@ -30,10 +50,10 @@
                     <label for="registerPassword">Contraseña</label>
                     <input type="password" class="form-control" id="registerPassword" placeholder="Contraseña" required>
                 </div>
-                <button id="registerButton" class="btn btn-primary">Registrarse</button>
-                <div class="form-floating mt-2">
+                <div class="form-floating m-2">
                     Ya tienes cuenta? <a href="login.html" class="text-light"> Logearse </a>
                 </div>
+                <button id="registerButton" class="btn btn-primary">Registrarse</button>
 
             </form>
         </div>
