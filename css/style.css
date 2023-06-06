@@ -1,0 +1,10 @@
+:root {
+  --bs-primary: #ff0000;
+  --bs-secondary: #00ff00;
+  --bs-navbar-bg: #000000;
+  --bs-text-color: #ffffff;
+}
+
+body {
+  background-color: #0e0e0e !important;
+}

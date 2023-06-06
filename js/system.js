@@ -73,15 +73,19 @@ async function loadSystem(name) {
 
     $("#systemZone").append(
         `
-        <div class="card">
+        <div class="card text-center">
             <div class="card-body">
-                <h1 class="card-title text-center">` +
+                <h1 class="card-title systemName">` +
         systemRow.data[0].name +
         ` </h1>
-                
-                <div id="rulesZone">
-                    <h4 class="card-title">Reglas <button id="addRuleButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createRuleModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button></h4>
+                <h4 class="card-title">Reglas 
+                    <button id="addRuleButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createRuleModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
+                </h4>
+                <div id="rulesZone" class="row justify-content-center">
                 </div>
+                
+                <br>
+                <button id="removeSystem" type="button" data-bs-toggle="modal" data-bs-target="#removeSystemModal" class="btn btn-danger">Eliminar sistema</button>
 
                 <div class="modal fade" id="systemInfo" tabindex="-1">
                     <div class="modal-dialog">
@@ -94,7 +98,7 @@ async function loadSystem(name) {
                               <input id="systemName" type="hidden" class="form-control" value="` +
         systemRow.data[0].name +
         `">
-                              <div class="input-group mb-3">
+                              <div class="input-group mb-1">
                                 <span class="input-group-text" id="basic-addon1">Nombre</span>
                                 <input id="systemName" type="text" class="form-control" value="` +
         systemRow.data[0].name +
@@ -109,6 +113,7 @@ async function loadSystem(name) {
                     </div>
                 </div>
                 
+                
                 <div class="modal fade" id="createRuleModal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -117,11 +122,11 @@ async function loadSystem(name) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="RuleModalBody">
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-1">
                                     <span class="input-group-text" id="basic-addon1">Nombre</span>
                                     <input type="text" class="form-control ruleName">
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-1">
                                     <span class="input-group-text" id="basic-addon1">Descripción</span>
                                     <textarea class="form-control ruleDesc" placeholder="Descripción" required id="floatingTextarea"></textarea>
                                 </div>
@@ -172,20 +177,41 @@ async function loadSystem(name) {
 
             </div>
         </div>
+        
+        <div class="modal fade" id="removeSystemModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Eliminar sistema</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="removeSystemModalBody">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="removeSystemButton" type="button" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         `
     );
+    $("#removeSystem").click(removeSystemModal);
+
     $("#addRuleButton").click(emptyModal);
     /* $("#updateSystemButton").click(updateSystem); */
 
     $("#createRuleButton").click(createRule);
     $("#updateRuleButton").click(updateRule);
     $("#removeRuleButton").click(removeRule);
+    $("#removeSystemButton").click(removeSystem);
 
 
     for (let i = 0; i < rules.data.length; i++) {
         $("#rulesZone").append(
             `
-            <div class="card">
+            <div class="card w-auto p-0 m-1 bg-primary text-light">
                 <div class="card-body">
                     <div class="card-text">
                         <div class="ruleId" hidden>` +
@@ -194,7 +220,7 @@ async function loadSystem(name) {
             <h5 class="card-title ruleName">` +
             rules.data[i].title +
             `</h5>
-            <h6 class="card-subtitle mb-2 text-muted ruleDesc">` +
+            <h6 class="card-subtitle mb-2 ruleDesc">` +
             rules.data[i].desc +
             `</h6>
 
@@ -231,13 +257,13 @@ function editRule(event) {
       <input type="hidden" class="form-control ruleId" value="` +
         event.target.parentNode.parentNode.querySelector(".ruleId").innerText +
         `">
-    <div class="input-group mb-3">
+    <div class="input-group mb-1">
       <span class="input-group-text" id="basic-addon1">Nombre</span>
       <input type="text" class="form-control ruleName" value="` +
         event.target.parentNode.parentNode.querySelector(".ruleName").innerText +
         `">
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group mb-1">
       <span class="input-group-text" id="basic-addon1">Descripción</span>
       <input type="text" class="form-control ruleDesc" value="` +
         event.target.parentNode.parentNode.querySelector(".ruleDesc").innerText +
@@ -251,7 +277,7 @@ function removeRuleModal(event) {
 
     $("#removeRuleModalBody").append(
         `
-      <p> ¿Quieres eliminar esta habilidad?</p>
+      <p> ¿Quieres eliminar esta regla?</p>
       
       <div class="">
             <div class="ruleId" hidden>`+ event.target.parentNode.parentNode.querySelector(".ruleId").innerText + `</div>
@@ -326,6 +352,34 @@ function removeRule(event) {
         .then((_response) => {
             alert("Remove successful");
             window.location.href = "system.html?name=" + $("#systemName").val();
+        })
+        .catch((err) => {
+            alert(err.response.text);
+        });
+}
+
+function removeSystemModal(event) {
+    $("#removeSystemModalBody").empty();
+
+    $("#removeSystemModalBody").append(
+        `
+      <p> ¿Quieres eliminar este sistema? <b> ` +
+        $(".systemName")[0].innerText +
+        `</b> </p>
+    `
+    );
+}
+
+function removeSystem(event) {
+    SUPABASE.from("systems")
+        .delete()
+        .eq(
+            "name",
+            $(".systemName")[0].innerText
+        )
+        .then((_response) => {
+            alert("Remove successful");
+            window.location.href = "index.html";
         })
         .catch((err) => {
             alert(err.response.text);

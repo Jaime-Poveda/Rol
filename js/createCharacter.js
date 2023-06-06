@@ -110,10 +110,10 @@ function writeSystemModal(rules) {
 
   for (let i = 0; i < rules.data.length; i++) {
     $("#systemRuleModalBody").append(`
-      <div class="card" style="width: 18rem;">
+      <div class="card p-0 m-1 w-auto bg-dark text-light">
         <div class="card-body">
           <h5 class="card-title">`+ rules.data[i].title + `</h5>
-          <h6 class="card-subtitle mb-2 text-muted">`+ rules.data[i].desc + `</h6>
+          <h6 class="card-subtitle mb-2">`+ rules.data[i].desc + `</h6>
         </div>
       </div>
     `)

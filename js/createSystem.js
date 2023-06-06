@@ -76,7 +76,7 @@ function emptyModal(event) {
 function addRule(event) {
     $("#rulesZone").append(
         `
-        <div class="card" style="width: 18rem;">
+        <div class="card m-2" style="width: auto;">
           <div class="card-body ruleGroup">
             <input type="text" class="card-title text-center fw-bold ruleTitle" placeholder="Título" required value="`+ event.target.parentNode.parentNode.querySelector("#ruleTitle").value + `" >
             <textarea class="form-control text-center ruleDesc" placeholder="Descripción" required id="floatingTextarea">`+ event.target.parentNode.parentNode.querySelector("#ruleDesc").value + `</textarea>

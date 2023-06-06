@@ -88,44 +88,53 @@ async function loadCharacter(id) {
                 <h1 class="card-title" id="charName">` +
     characterRow.data[0].name +
     `</h1>
-                <h2 class="card-subtitle mb-2 text-muted">` +
+                <h2 class="card-subtitle mb-2">` +
     new Date(characterRow.data[0].date).toLocaleDateString() +
     `</h2>
-                <h5 class="card-title">Características 
-                <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#characerInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button></h5>
-                <div class="card">
-                    <div class="card-body row row-cols-2 justify-content-center align-items-center">
-                        <div class="card-text d-flex flex-row"><b>Sistema:</b> &nbsp` +
+                <h3 class="card-title">Características 
+                  <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#characerInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                </h3>
+                <div class="row justify-content-center">
+                    <div class="card p-0 w-auto bg-dark text-light">
+                        <div class="card-body">
+                            <div class="card-text d-flex flex-row justify-content-center"><b>Sistema:</b> &nbsp` +
     characterRow.data[0].system +
     `</div>
-                        <div class="card-text d-flex flex-row"><b>Descripción:</b> &nbsp` +
+                            <div class="card-text d-flex flex-row justify-content-center"><b>Descripción:</b> &nbsp` +
     characterRow.data[0].description +
     `</div>
-                        <div class="card-text d-flex flex-row"><b>Raza:</b> &nbsp` +
+                            <div class="card-text d-flex flex-row justify-content-center"><b>Raza:</b> &nbsp` +
     characterRow.data[0].race +
     `</div>
-                        <div class="card-text d-flex flex-row"><b>Clase:</b> &nbsp` +
+                            <div class="card-text d-flex flex-row justify-content-center"><b>Clase:</b> &nbsp` +
     characterRow.data[0].class +
     `</div>
-                        <div class="card-text d-flex flex-row"><b>Nivel:</b> &nbsp` +
+                            <div class="card-text d-flex flex-row justify-content-center"><b>Nivel:</b> &nbsp` +
     characterRow.data[0].level +
     `</div>
-                        <div class="card-text d-flex flex-row"><b>HP:</b> &nbsp` +
+                            <div class="card-text d-flex flex-row justify-content-center"><b>HP:</b> &nbsp` +
     characterRow.data[0].hp +
     `</div>
+                        </div>
                     </div>
                 </div>
 
-                <div id="attrZone">
-                    <h5 class="card-title">Atributos <button id="addAttrButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createAttrModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button></h5>
+                <h3 class="card-title mt-3">Atributos 
+                  <button id="addAttrButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createAttrModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
+                </h3>
+                <div id="attrZone" class="row justify-content-center">
                 </div>
 
-                <div id="itemsZone">
-                    <h4>Equipo <button id="addItemButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createItemModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button></h4>
+                <h3>Equipo 
+                  <button id="addItemButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createItemModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
+                </h3>
+                <div id="itemsZone" class="row justify-content-center">
                 </div>
 
-                <div id="skillsZone">
-                    <h4>Habilidades <button id="addSkillButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button></h4>
+                <h3>
+                  Habilidades <button id="addSkillButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
+                </h3>
+                <div id="skillsZone" class="row justify-content-center">
                 </div>
                 
                 <br>
@@ -450,25 +459,27 @@ async function loadCharacter(id) {
   for (let i = 0; i < attributes.data.length; i++) {
     $("#attrZone").append(
       `
-        <div class="card">
+        <div class="card w-auto m-1 p-0 bg-info text-light">
             <div class="card-body">
-                <div class="card-text d-flex flex-row">
+                <div class="card-text text-center">
                     <div class="attrId" hidden>` +
       attributes.data[i].id +
       `</div><div class="attrName fw-bold">` +
       attributes.data[i].name +
-      `</div>&nbsp&nbsp  <i>Base:</i> &nbsp<div class="attrBase">` +
+      `</div><div class="d-flex flex-row justify-content-center"> <i>Base:</i> &nbsp<div class="attrBase">` +
       attributes.data[i].baseValue +
-      `</div>&nbsp&nbsp <i>Suma:</i> &nbsp<div class="attrSum">` +
+      `</div></div><div class="d-flex flex-row justify-content-center"> <i>Suma:</i> &nbsp<div class="attrSum">` +
       attributes.data[i].sum +
-      `</div>&nbsp&nbsp <i>Total:</i> &nbsp<div class="attrTotal">` +
+      `</div></div><div class="d-flex flex-row justify-content-center"> <i>Total:</i> &nbsp<div class="attrTotal">` +
       attributes.data[i].totalValue +
-      `</div>&nbsp&nbsp <i>Modificador:</i> &nbsp<div class="attrMod">` +
+      `</div></div><div class="d-flex flex-row justify-content-center"> <i>Modificador:</i> &nbsp<div class="attrMod">` +
       attributes.data[i].modifier +
-      `
-                    </div>&nbsp&nbsp
-                    <button type="button" class="editAttr btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#attrModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
-                    <button type="button" class="removeAttr btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeAttrModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+      `</div>
+                    </div>
+                    <div class="mt-1">
+                      <button type="button" class="editAttr btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#attrModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                      <button type="button" class="removeAttr btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeAttrModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+                    </div>
                 </div>
             </div>
         </div>`
@@ -480,25 +491,28 @@ async function loadCharacter(id) {
   for (let i = 0; i < items.data.length; i++) {
     $("#itemsZone").append(
       `
-        <div class="card">
+        <div class="card w-auto m-1 p-0 bg-warning">
             <div class="card-body">
-                <div class="itemId" hidden>` +
+                <div class="card-text text-center">
+                    <div class="itemId" hidden>` +
       items.data[i].id +
       `</div>
-                <h5 class="card-title itemName">` +
+                    <h5 class="card-title d-flex flex-row justify-content-center itemName">` +
       items.data[i].name +
       `</h5>
-                <h6 class="card-subtitle mb-2 text-muted itemDesc">` +
+                    <h6 class="card-subtitle text-muted itemDesc">` +
       items.data[i].description +
-      `</h6>
-                <div class="d-flex flex-row">Daño:&nbsp<div class="card-text itemDamage"> ` +
-      items.data[i].damage +
-      `</div></div>
-                <div class="d-flex flex-row">Cantidad:&nbsp<div class="card-text itemAmount">` +
+      `</h6>` +
+      '<div class="d-flex flex-row justify-content-center"><i>Daño:</i>&nbsp<div class="card-text itemDamage">' +
+        items.data[i].damage + '</div></div>'
+      + `
+                    
+                    <div class="d-flex flex-row justify-content-center"><i>Cantidad:</i>&nbsp<div class="card-text itemAmount">` +
       items.data[i].amount +
       `</div></div>
-                <button type="button" class="editItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#itemModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
-                <button type="button" class="removeItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeItemModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+                    <button type="button" class="editItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#itemModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                    <button type="button" class="removeItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeItemModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+                </div>
             </div>
         </div>
         `
@@ -510,26 +524,28 @@ async function loadCharacter(id) {
   for (let i = 0; i < skills.data.length; i++) {
     $("#skillsZone").append(
       `
-        <div class="card">
+        <div class="card w-auto m-1 p-0 bg-success text-light">
             <div class="card-body">
-                <div class="skillId" hidden>` +
+                <div class="card-text text-center">
+                    <div class="skillId" hidden>` +
       skills.data[i].id +
       `</div>
-                <h5 class="card-title skillName">` +
+                    <h5 class="card-title skillName">` +
       skills.data[i].name +
       `</h5>
-                <h6 class="card-subtitle mb-2 text-muted skillDesc">` +
+                    <h6 class="card-subtitle mb-2 skillDesc">` +
       skills.data[i].description +
       `</h6>
-                <div class="d-flex flex-row">Daño:&nbsp<div class="card-text skillDamage">` +
+                    <div class="d-flex flex-row justify-content-center"><i>Daño:</i>&nbsp<div class="card-text skillDamage">` +
       skills.data[i].damage +
       `</div></div>
                 
-                <div class="d-flex flex-row">Efecto:&nbsp<div class="card-text skillEffect">` +
+                    <div class="d-flex flex-row justify-content-center"><i>Efecto:</i>&nbsp<div class="card-text skillEffect">` +
       skills.data[i].effect +
       `</div></div>
-                <button type="button" class="editSkill btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#skillModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
-                <button type="button" class="removeSkill btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+                    <button type="button" class="editSkill btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#skillModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                    <button type="button" class="removeSkill btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+                </div>
             </div>
         </div>
         `
