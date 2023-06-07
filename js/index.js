@@ -83,7 +83,6 @@ async function loadCharacters() {
             <a class="text-decoration-none" href="character.html?id=` +
       characterRow.data[i].id +
       `">
-            `+/* <img src="../img/placeholder.jpg" class="card-img-top" alt="Character Image"></img> */`
             <img src="../img/placeholder.jpg" class="card-img-top" alt="Character Image">
             <div class="card-body">
                 <h5 class="card-title">` +
