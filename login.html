@@ -35,15 +35,24 @@
     </nav>
     <main>
         <div class="container d-flex justify-content-center align-items-center mt-5" style="max-width: 500px;">
-            <form id="logInForm" class="text-center border rounded p-3 text-light bg-dark" style="width: 100%;">
-                <div class="form-group mb-2">
+            <form id="logInForm" class="text-center border border-secondary rounded p-3 text-light bg-dark" style="width: 100%;">
+                <h1>Login</h1>
+                <div class="form-floating text-dark">
+                    <input type="email" class="form-control" id="loginEmail" placeholder="Email" required>
+                    <label for="floatingInput">Email</label>
+                </div>
+                <!-- <div class="form-group mb-2">
                     <label for="loginEmail">Email</label>
                     <input type="email" class="form-control" id="loginEmail" placeholder="Introduce tu email" required>
+                </div> -->
+                <div class="form-floating text-dark">
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" required>
+                    <label for="floatingPassword">Contraseña</label>
                 </div>
-                <div class="form-group mb-2">
+                <!-- <div class="form-group mb-2">
                     <label for="loginPassword">Contraseña</label>
                     <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" required>
-                </div>
+                </div> -->
                 <div class="form-floating m-2">
                     No tienes cuenta? <a href="register.html" class="text-light"> Registrarse </a>
                 </div>

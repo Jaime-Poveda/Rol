@@ -57,6 +57,8 @@ async function loadLogin() {
         <a href="createSystem.html" class="nav-link active">Añadir sistema</a>
       `)
     }
+
+    loadPoints(userRow);
   }
 }
 function logOut(event) {
@@ -89,6 +91,13 @@ async function loadSystems() {
     `
     );
   }
+}
+
+async function loadPoints(user) {
+  $("#createCharacterZone").append(`
+    <p class="p-0 m-0">Tienes `+ user.data[0].points + ` puntos</p>
+    <p>Crear un personaje cuesta 100 puntos</p>
+  `)
 }
 
 async function systemRules() {
@@ -456,98 +465,118 @@ async function createCharacter(event) {
   event.preventDefault();
 
   let user = await SUPABASE.auth.getUser();
+  
+  let userRow = await SUPABASE.from("users")
+  .select()
+  .eq("id", user.data.user.id);
 
-  let characterRow = await SUPABASE.from("characters")
-    .upsert({
-      userId: user.data.user.id,
-      system: $("#charSystem")[0].value ? $("#charSystem")[0].value : "",
-      name: $("#charName")[0].value,
-      description: $("#charDesc")[0].value ? $("#charDesc")[0].value : "",
-      race: $("#charRace")[0].value ? $("#charRace")[0].value : "",
-      class: $("#charClass")[0].value ? $("#charClass")[0].value : "",
-      level: $("#charLevel")[0].value ? $("#charLevel")[0].value : 1,
-      hp: $("#charHP")[0].value ? $("#charHP")[0].value : 1,
-    })
-    .select();
+  if (userRow.data[0].points > 0) {
 
-  for (let i = 0; i < $(".attrGroup").length; i++) {
-    SUPABASE.from("attributes")
-      .insert({
-        characterId: characterRow.data[0].id,
-        name: $(".attrGroup .attrName")[i].value
-          ? $(".attrGroup .attrName")[i].value
-          : "",
-        baseValue: $(".attrGroup .attrBase")[i].value
-          ? $(".attrGroup .attrBase")[i].value
-          : 0,
-        sum: $(".attrGroup .attrSum")[i].value
-          ? $(".attrGroup .attrSum")[i].value
-          : 0,
-        totalValue: $(".attrGroup .attrTotal")[i].value
-          ? $(".attrGroup .attrTotal")[i].value
-          : 0,
-        modifier: $(".attrGroup .attrModifier")[i].value
-          ? $(".attrGroup .attrModifier")[i].value
-          : 0,
+    let characterRow = await SUPABASE.from("characters")
+      .upsert({
+        userId: user.data.user.id,
+        system: $("#charSystem")[0].value ? $("#charSystem")[0].value : "",
+        name: $("#charName")[0].value,
+        description: $("#charDesc")[0].value ? $("#charDesc")[0].value : "",
+        race: $("#charRace")[0].value ? $("#charRace")[0].value : "",
+        class: $("#charClass")[0].value ? $("#charClass")[0].value : "",
+        level: $("#charLevel")[0].value ? $("#charLevel")[0].value : 1,
+        hp: $("#charHP")[0].value ? $("#charHP")[0].value : 1,
       })
+      .select();
+
+    for (let i = 0; i < $(".attrGroup").length; i++) {
+      SUPABASE.from("attributes")
+        .insert({
+          characterId: characterRow.data[0].id,
+          name: $(".attrGroup .attrName")[i].value
+            ? $(".attrGroup .attrName")[i].value
+            : "",
+          baseValue: $(".attrGroup .attrBase")[i].value
+            ? $(".attrGroup .attrBase")[i].value
+            : 0,
+          sum: $(".attrGroup .attrSum")[i].value
+            ? $(".attrGroup .attrSum")[i].value
+            : 0,
+          totalValue: $(".attrGroup .attrTotal")[i].value
+            ? $(".attrGroup .attrTotal")[i].value
+            : 0,
+          modifier: $(".attrGroup .attrModifier")[i].value
+            ? $(".attrGroup .attrModifier")[i].value
+            : 0,
+        })
+        .then((_response) => {
+          //alert("Create successful");
+        })
+        .catch((err) => {
+          alert(err.response.text);
+        });
+    }
+
+    for (let i = 0; i < $(".skillGroup").length; i++) {
+      SUPABASE.from("skills")
+        .insert({
+          characterId: characterRow.data[0].id,
+          name: $(".skillGroup .skillName")[i].value
+            ? $(".skillGroup .skillName")[i].value
+            : "",
+          damage: $(".skillGroup .skillDamage")[i].value
+            ? $(".skillGroup .skillDamage")[i].value
+            : "",
+          description: $(".skillGroup .skillDesc")[i].value
+            ? $(".skillGroup .skillDesc")[i].value
+            : "",
+          effect: $(".skillGroup .skillEffect")[i].value
+            ? $(".skillGroup .skillEffect")[i].value
+            : "",
+        })
+        .then((_response) => {
+          //alert("Create successful");
+        })
+        .catch((err) => {
+          alert(err.response.text);
+        });
+    }
+
+    for (let i = 0; i < $(".itemGroup").length; i++) {
+      SUPABASE.from("items")
+        .insert({
+          characterId: characterRow.data[0].id,
+          name: $(".itemGroup .itemName")[i].value
+            ? $(".itemGroup .itemName")[i].value
+            : "",
+          amount: $(".itemGroup .itemAmount")[i].value
+            ? $(".itemGroup .itemAmount")[i].value
+            : 1,
+          description: $(".itemGroup .itemDesc")[i].value
+            ? $(".itemGroup .itemDesc")[i].value
+            : "",
+          damage: $(".itemGroup .itemDamage")[i].value
+            ? $(".itemGroup .itemDamage")[i].value
+            : "",
+        })
+        .then((_response) => {
+          //alert("Create successful");
+        })
+        .catch((err) => {
+          alert(err.response.text);
+        });
+    }
+    SUPABASE.from("users")
+      .update({
+        points: userRow.data[0].points - 100
+      })
+      .eq("id", user.data.user.id)
       .then((_response) => {
         //alert("Create successful");
       })
       .catch((err) => {
         alert(err.response.text);
       });
-  }
 
-  for (let i = 0; i < $(".skillGroup").length; i++) {
-    SUPABASE.from("skills")
-      .insert({
-        characterId: characterRow.data[0].id,
-        name: $(".skillGroup .skillName")[i].value
-          ? $(".skillGroup .skillName")[i].value
-          : "",
-        damage: $(".skillGroup .skillDamage")[i].value
-          ? $(".skillGroup .skillDamage")[i].value
-          : "",
-        description: $(".skillGroup .skillDesc")[i].value
-          ? $(".skillGroup .skillDesc")[i].value
-          : "",
-        effect: $(".skillGroup .skillEffect")[i].value
-          ? $(".skillGroup .skillEffect")[i].value
-          : "",
-      })
-      .then((_response) => {
-        //alert("Create successful");
-      })
-      .catch((err) => {
-        alert(err.response.text);
-      });
+    alert("Create successful");
+    window.location.href = "character.html?id=" + characterRow.data[0].id;
+  } else {
+    alert("No hay puntos suficientes para crear un personaje");
   }
-
-  for (let i = 0; i < $(".itemGroup").length; i++) {
-    SUPABASE.from("items")
-      .insert({
-        characterId: characterRow.data[0].id,
-        name: $(".itemGroup .itemName")[i].value
-          ? $(".itemGroup .itemName")[i].value
-          : "",
-        amount: $(".itemGroup .itemAmount")[i].value
-          ? $(".itemGroup .itemAmount")[i].value
-          : 1,
-        description: $(".itemGroup .itemDesc")[i].value
-          ? $(".itemGroup .itemDesc")[i].value
-          : "",
-        damage: $(".itemGroup .itemDamage")[i].value
-          ? $(".itemGroup .itemDamage")[i].value
-          : "",
-      })
-      .then((_response) => {
-        //alert("Create successful");
-      })
-      .catch((err) => {
-        alert(err.response.text);
-      });
-  }
-
-  alert("Create successful");
-  window.location.href = "character.html?id=" + characterRow.data[0].id;
 }
