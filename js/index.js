@@ -80,9 +80,10 @@ async function loadCharacters() {
     $("#charactersZone").append(
       `
       <div class="card m-2 p-1 text-center" style="width: 200px;">
-        <a class="text-decoration-none" href="character.html?id=` +
+            <a class="text-decoration-none" href="character.html?id=` +
       characterRow.data[i].id +
       `">
+            `+/* <img src="../img/placeholder.jpg" class="card-img-top" alt="Character Image"></img> */`
             <img src="../img/placeholder.jpg" class="card-img-top" alt="Character Image">
             <div class="card-body">
                 <h5 class="card-title">` +

@@ -83,7 +83,7 @@ async function loadCharacter(id) {
 
   $("#characterZone").append(
     `
-        <div class="card">
+        <div class="card bg-dark text-light">
             <div class="card-body text-center grid justify-content-center align-items-center">
                 <h1 class="card-title" id="charName">` +
     characterRow.data[0].name +
@@ -95,7 +95,7 @@ async function loadCharacter(id) {
                   <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#characerInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
                 </h3>
                 <div class="row justify-content-center">
-                    <div class="card p-0 w-auto bg-dark text-light">
+                    <div class="card p-0 w-auto text-dark">
                         <div class="card-body">
                             <div class="card-text d-flex flex-row justify-content-center"><b>Sistema:</b> &nbsp` +
     characterRow.data[0].system +
@@ -491,7 +491,7 @@ async function loadCharacter(id) {
   for (let i = 0; i < items.data.length; i++) {
     $("#itemsZone").append(
       `
-        <div class="card w-auto m-1 p-0 bg-warning">
+        <div class="card w-auto m-1 p-0 bg-warning text-dark">
             <div class="card-body">
                 <div class="card-text text-center">
                     <div class="itemId" hidden>` +
@@ -500,11 +500,11 @@ async function loadCharacter(id) {
                     <h5 class="card-title d-flex flex-row justify-content-center itemName">` +
       items.data[i].name +
       `</h5>
-                    <h6 class="card-subtitle text-muted itemDesc">` +
+                    <h6 class="card-subtitle itemDesc">` +
       items.data[i].description +
       `</h6>` +
       '<div class="d-flex flex-row justify-content-center"><i>Daño:</i>&nbsp<div class="card-text itemDamage">' +
-        items.data[i].damage + '</div></div>'
+      items.data[i].damage + '</div></div>'
       + `
                     
                     <div class="d-flex flex-row justify-content-center"><i>Cantidad:</i>&nbsp<div class="card-text itemAmount">` +
@@ -583,36 +583,36 @@ function editAttr(event) {
   $("#attrModalBody").append(
     `
     <input type="hidden" class="form-control attrId" value="` +
-    event.target.parentNode.parentNode.querySelector(".attrId").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrId").innerText +
     `">
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Nombre</span>
     <input type="text" class="form-control attrName" value="` +
-    event.target.parentNode.parentNode.querySelector(".attrName").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrName").innerText +
     `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Valor Base</span>
     <input type="text" class="form-control attrBase" value="` +
-    event.target.parentNode.parentNode.querySelector(".attrBase").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrBase").innerText +
     `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Suma</span>
     <input type="text" class="form-control attrSum" value="` +
-    event.target.parentNode.parentNode.querySelector(".attrSum").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrSum").innerText +
     `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Total</span>
     <input type="text" class="form-control attrTotal" value="` +
-    event.target.parentNode.parentNode.querySelector(".attrTotal").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrTotal").innerText +
     `">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Modificador</span>
     <input type="text" class="form-control attrMod" value="` +
-    event.target.parentNode.parentNode.querySelector(".attrMod").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrMod").innerText +
     `">
   </div>
   `
@@ -623,12 +623,12 @@ function updateAttr(event) {
     .update({
       name: event.target.parentNode.parentNode.querySelector(".attrName").value,
       baseValue:
-        event.target.parentNode.parentNode.querySelector(".attrBase").value,
-      sum: event.target.parentNode.parentNode.querySelector(".attrSum").value,
+        event.target.parentNode.parentNode.querySelector(".attrBase").value ? event.target.parentNode.parentNode.querySelector(".attrBase").value : 0,
+      sum: event.target.parentNode.parentNode.querySelector(".attrSum").value ? event.target.parentNode.parentNode.querySelector(".attrSum").value : 0,
       totalValue:
-        event.target.parentNode.parentNode.querySelector(".attrTotal").value,
+        event.target.parentNode.parentNode.querySelector(".attrTotal").value ? event.target.parentNode.parentNode.querySelector(".attrTotal").value : 0,
       modifier:
-        event.target.parentNode.parentNode.querySelector(".attrMod").value,
+        event.target.parentNode.parentNode.querySelector(".attrMod").value ? event.target.parentNode.parentNode.querySelector(".attrMod").value : 0,
     })
     .eq("id", event.target.parentNode.parentNode.querySelector(".attrId").value)
     .then((_response) => {
@@ -685,7 +685,7 @@ function updateItem(event) {
       description:
         event.target.parentNode.parentNode.querySelector(".itemDesc").value,
       amount:
-        event.target.parentNode.parentNode.querySelector(".itemAmount").value,
+        event.target.parentNode.parentNode.querySelector(".itemAmount").value ? event.target.parentNode.parentNode.querySelector(".itemAmount").value : 1,
       damage:
         event.target.parentNode.parentNode.querySelector(".itemDamage").value,
     })
@@ -777,12 +777,12 @@ function createAttr(event) {
       characterId: $("#charId").val(),
       name: event.target.parentNode.parentNode.querySelector(".attrName").value,
       baseValue:
-        event.target.parentNode.parentNode.querySelector(".attrBase").value,
-      sum: event.target.parentNode.parentNode.querySelector(".attrSum").value,
+        event.target.parentNode.parentNode.querySelector(".attrBase").value ? event.target.parentNode.parentNode.querySelector(".attrBase").value : 0,
+      sum: event.target.parentNode.parentNode.querySelector(".attrSum").value ? event.target.parentNode.parentNode.querySelector(".attrSum").value : 0,
       totalValue:
-        event.target.parentNode.parentNode.querySelector(".attrTotal").value,
+        event.target.parentNode.parentNode.querySelector(".attrTotal").value ? event.target.parentNode.parentNode.querySelector(".attrTotal").value : 0,
       modifier:
-        event.target.parentNode.parentNode.querySelector(".attrMod").value,
+        event.target.parentNode.parentNode.querySelector(".attrMod").value ? event.target.parentNode.parentNode.querySelector(".attrMod").value : 0,
     })
     .then((_response) => {
       alert("Create successful");
@@ -800,7 +800,7 @@ function createItem(event) {
       description:
         event.target.parentNode.parentNode.querySelector(".itemDesc").value,
       amount:
-        event.target.parentNode.parentNode.querySelector(".itemAmount").value,
+        event.target.parentNode.parentNode.querySelector(".itemAmount").value ? event.target.parentNode.parentNode.querySelector(".itemAmount").value : 1,
       damage:
         event.target.parentNode.parentNode.querySelector(".itemDamage").value,
     })
@@ -843,17 +843,17 @@ function removeAttrModal(event) {
     
     <div class="d-flex flex-row">
         <div class="attrId" hidden>` +
-    event.target.parentNode.parentNode.querySelector(".attrId").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrId").innerText +
     `</div><div class="attrName fw-bold">` +
-    event.target.parentNode.parentNode.querySelector(".attrName").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrName").innerText +
     `</div>&nbsp&nbsp  <i>Base:</i> &nbsp<div class="attrBase">` +
-    event.target.parentNode.parentNode.querySelector(".attrBase").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrBase").innerText +
     `</div>&nbsp&nbsp <i>Suma:</i> &nbsp<div class="attrSum">` +
-    event.target.parentNode.parentNode.querySelector(".attrSum").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrSum").innerText +
     `</div>&nbsp&nbsp <i>Total:</i> &nbsp<div class="attrTotal">` +
-    event.target.parentNode.parentNode.querySelector(".attrTotal").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrTotal").innerText +
     `</div>&nbsp&nbsp <i>Modificador:</i> &nbsp<div class="attrMod">` +
-    event.target.parentNode.parentNode.querySelector(".attrMod").innerText +
+    event.target.parentNode.parentNode.parentNode.querySelector(".attrMod").innerText +
     `
         </div>
     </div>

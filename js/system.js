@@ -73,7 +73,7 @@ async function loadSystem(name) {
 
     $("#systemZone").append(
         `
-        <div class="card text-center">
+        <div class="card text-center bg-dark text-light">
             <div class="card-body">
                 <h1 class="card-title systemName">` +
         systemRow.data[0].name +
@@ -211,7 +211,7 @@ async function loadSystem(name) {
     for (let i = 0; i < rules.data.length; i++) {
         $("#rulesZone").append(
             `
-            <div class="card w-auto p-0 m-1 bg-primary text-light">
+            <div class="card w-auto p-0 m-1 text-dark">
                 <div class="card-body">
                     <div class="card-text">
                         <div class="ruleId" hidden>` +

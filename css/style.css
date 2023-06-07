@@ -5,6 +5,51 @@
   --bs-text-color: #ffffff;
 }
 
+html{
+  height: 100%;
+}
+
 body {
+  height: 100%;
   background-color: #0e0e0e !important;
+}
+
+#indexBody{
+  background: url("../img/backgrounds/forest.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#createCharacterBody{
+  background: url("../img/backgrounds/bonfire.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#createSystemBody{
+  background: url("../img/backgrounds/city.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#characterBody{
+  background: url("../img/backgrounds/dices.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#systemBody{
+  background: url("../img/backgrounds/city2.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
