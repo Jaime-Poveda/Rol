@@ -56,11 +56,11 @@ function logOut(event) {
   SUPABASE.auth
     .signOut()
     .then((_response) => {
-      alert("Logout successful");
+      //alert("Logout successful");
       window.location.href = "index.html";
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -84,7 +84,7 @@ async function loadCharacters() {
       characterRow.data[i].id +
       `">
             `+/* <img src="../img/placeholder.jpg" class="card-img-top" alt="Character Image"></img> */`
-            <img src="../img/placeholder.jpg" class="card-img-top" alt="Character Image"></img>
+            <img src="https://afribcvcanlurbnjrioe.supabase.co/storage/v1/object/public/characters/`+characterRow.data[i].image+`" class="card-img-top" alt="Character Image"></img>
             <div class="card-body">
                 <h5 class="card-title">` +
       characterRow.data[i].name +

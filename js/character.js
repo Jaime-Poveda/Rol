@@ -54,11 +54,11 @@ function logOut(event) {
   SUPABASE.auth
     .signOut()
     .then((_response) => {
-      alert("Logout successful");
+      //alert("Logout successful");
       window.location.href = "index.html";
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -85,12 +85,14 @@ async function loadCharacter(id) {
     `
         <div class="card bg-dark text-light">
             <div class="card-body text-center grid justify-content-center align-items-center">
+                <img src="https://afribcvcanlurbnjrioe.supabase.co/storage/v1/object/public/characters/`+characterRow.data[0].image+`" class="card-img-top rounded" alt="Character Image" style="max-width:250px"></img>
                 <h1 class="card-title" id="charName">` +
     characterRow.data[0].name +
     `</h1>
                 <h2 class="card-subtitle mb-2">` +
     new Date(characterRow.data[0].date).toLocaleDateString() +
     `</h2>
+    
                 <h3 class="card-title">Características 
                   <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#characerInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
                 </h3>
@@ -556,7 +558,7 @@ async function loadCharacter(id) {
 }
 
 function updateCharacter(event) {
-  console.log($("#charNameModal").val());
+  //console.log($("#charNameModal").val());
   SUPABASE.from("characters")
     .update({
       name: $("#charNameModal").val(),
@@ -569,11 +571,11 @@ function updateCharacter(event) {
     })
     .eq("id", $("#charId").val())
     .then((_response) => {
-      alert("Update successful");
+      //alert("Update successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -632,11 +634,11 @@ function updateAttr(event) {
     })
     .eq("id", event.target.parentNode.parentNode.querySelector(".attrId").value)
     .then((_response) => {
-      alert("Update successful");
+      //alert("Update successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -691,11 +693,11 @@ function updateItem(event) {
     })
     .eq("id", event.target.parentNode.parentNode.querySelector(".itemId").value)
     .then((_response) => {
-      alert("Update successful");
+      //alert("Update successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -753,11 +755,11 @@ function updateSkill(event) {
       event.target.parentNode.parentNode.querySelector(".skillId").value
     )
     .then((_response) => {
-      alert("Update successful");
+      //alert("Update successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -785,11 +787,11 @@ function createAttr(event) {
         event.target.parentNode.parentNode.querySelector(".attrMod").value ? event.target.parentNode.parentNode.querySelector(".attrMod").value : 0,
     })
     .then((_response) => {
-      alert("Create successful");
+      //alert("Create successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 function createItem(event) {
@@ -805,11 +807,11 @@ function createItem(event) {
         event.target.parentNode.parentNode.querySelector(".itemDamage").value,
     })
     .then((_response) => {
-      alert("Create successful");
+      //alert("Create successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 function createSkill(event) {
@@ -826,11 +828,11 @@ function createSkill(event) {
         event.target.parentNode.parentNode.querySelector(".skillDamage").value,
     })
     .then((_response) => {
-      alert("Create successful");
+      //alert("Create successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -869,11 +871,11 @@ function removeAttr(event) {
       event.target.parentNode.parentNode.querySelector(".attrId").innerText
     )
     .then((_response) => {
-      alert("Remove successful");
+      //alert("Remove successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -915,11 +917,11 @@ function removeItem(event) {
       event.target.parentNode.parentNode.querySelector(".itemId").innerText
     )
     .then((_response) => {
-      alert("Remove successful");
+      //alert("Remove successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -959,11 +961,11 @@ function removeSkill(event) {
       event.target.parentNode.parentNode.querySelector(".skillId").innerText
     )
     .then((_response) => {
-      alert("Remove successful");
+      //alert("Remove successful");
       window.location.href = "character.html?id=" + $("#charId").val();
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -987,10 +989,10 @@ function removeChar(event) {
       $("#charId").val()
     )
     .then((_response) => {
-      alert("Remove successful");
+      //alert("Remove successful");
       window.location.href = "index.html";
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }

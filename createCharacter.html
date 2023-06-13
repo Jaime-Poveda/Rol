@@ -38,6 +38,12 @@
                 <h1>Crear personaje</h1>
                 <div class="form-group mb-1">
                     <div class="input-group">
+                        <span class="input-group-text">Imagen</span>
+                        <input class="form-control" type="file" accept="image/*" id="charImage">
+                    </div>
+                </div>
+                <div class="form-group mb-1">
+                    <div class="input-group">
                         <span class="input-group-text">Nombre</span>
                         <input id="charName" type="text" class="form-control" placeholder="Nombre">
                     </div>
@@ -166,9 +172,8 @@
                 <div class="form-group my-2">
                     <h3>Habilidades
                         <button type="button" id="addSkillButton" class="btn btn-light p-0 m-0 border-0"
-                            data-bs-toggle="modal" data-bs-target="#skillModal"
-                            style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton"
-                                style="width: 100%;"></button>
+                            data-bs-toggle="modal" data-bs-target="#skillModal" style="width: 25px; height: 25px;"><img
+                                src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
                     </h3>
 
                     <div class="modal fade" id="skillModal" tabindex="-1">
@@ -214,9 +219,8 @@
                 <div class="form-group my-2">
                     <h3>Equipo
                         <button type="button" id="addItemButton" class="btn btn-light p-0 m-0 border-0"
-                            data-bs-toggle="modal" data-bs-target="#itemModal"
-                            style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton"
-                                style="width: 100%;"></button>
+                            data-bs-toggle="modal" data-bs-target="#itemModal" style="width: 25px; height: 25px;"><img
+                                src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
                     </h3>
 
                     <div class="modal fade" id="itemModal" tabindex="-1">

@@ -18,7 +18,7 @@ async function signUp(event) {
     .signUp({ email, password })
     .then((response) => {
       if (response.error) {
-        alert(response.error.message);
+        //alert(response.error.message);
       } else {
         //window.location.href = "index.html";
         /* console.log(response);
@@ -29,16 +29,16 @@ async function signUp(event) {
             name: name
           })
           .then((_response) => {
-            alert("Create successful");
+            //alert("Create successful");
             window.location.href = "index.html";
           })
           .catch((err) => {
-            alert(err.response.text);
+            //alert(err.response.text);
           });
       }
     })
     .catch((err) => {
-      alert(err);
+      //alert(err);
     });
 
   /* let user = await SUPABASE.auth.getUser();
@@ -49,11 +49,11 @@ async function signUp(event) {
       name: name
     })
     .then((_response) => {
-      alert("Create successful");
+      //alert("Create successful");
       window.location.href = "index.html";
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     }); */
 }
 

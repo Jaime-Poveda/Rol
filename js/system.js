@@ -53,11 +53,11 @@ function logOut(event) {
     SUPABASE.auth
         .signOut()
         .then((_response) => {
-            alert("Logout successful");
+            //alert("Logout successful");
             window.location.href = "index.html";
         })
         .catch((err) => {
-            alert(err.response.text);
+            //alert(err.response.text);
         });
 }
 
@@ -299,17 +299,17 @@ function updateSystem(event) {
         })
         .eq("name", $("#systemName").val())
         .then((_response) => {
-            console.log(_response)
-            alert("Update successful");
+            //console.log(_response)
+            //alert("Update successful");
             window.location.href = "system.html?name=" + $("#systemName").val();
         })
         .catch((err) => {
-            alert(err.response.text);
+            //alert(err.response.text);
         });
 }
 
 function createRule(event) {
-    console.log($("#systemName").val());
+    //console.log($("#systemName").val());
 
     SUPABASE.from("systemRules")
         .insert({
@@ -318,11 +318,11 @@ function createRule(event) {
             desc: event.target.parentNode.parentNode.querySelector(".ruleDesc").value,
         })
         .then((_response) => {
-            alert("Create successful");
+            //alert("Create successful");
             window.location.href = "system.html?name=" + $("#systemName").val();
         })
         .catch((err) => {
-            alert(err.response.text);
+            //alert(err.response.text);
         });
 }
 function updateRule(event) {
@@ -335,11 +335,11 @@ function updateRule(event) {
             "id", event.target.parentNode.parentNode.querySelector(".ruleId").value
         )
         .then((_response) => {
-            alert("Update successful");
+            //alert("Update successful");
             window.location.href = "system.html?name=" + $("#systemName").val();
         })
         .catch((err) => {
-            alert(err.response.text);
+            //alert(err.response.text);
         });
 }
 function removeRule(event) {
@@ -350,11 +350,11 @@ function removeRule(event) {
             event.target.parentNode.parentNode.querySelector(".ruleId").innerText
         )
         .then((_response) => {
-            alert("Remove successful");
+            //alert("Remove successful");
             window.location.href = "system.html?name=" + $("#systemName").val();
         })
         .catch((err) => {
-            alert(err.response.text);
+            //alert(err.response.text);
         });
 }
 
@@ -378,10 +378,10 @@ function removeSystem(event) {
             $(".systemName")[0].innerText
         )
         .then((_response) => {
-            alert("Remove successful");
+            //alert("Remove successful");
             window.location.href = "index.html";
         })
         .catch((err) => {
-            alert(err.response.text);
+            //alert(err.response.text);
         });
 }

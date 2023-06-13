@@ -52,11 +52,11 @@ function logOut(event) {
     SUPABASE.auth
         .signOut()
         .then((_response) => {
-            alert("Logout successful");
+            //alert("Logout successful");
             window.location.href = "index.html";
         })
         .catch((err) => {
-            alert(err.response.text);
+            //alert(err.response.text);
         });
 }
 
@@ -120,10 +120,10 @@ async function createSystem(event) {
                 //alert("Create successful");
             })
             .catch((err) => {
-                alert(err.response.text);
+                //alert(err.response.text);
             });
     }
 
-    alert("System created");
+    //alert("System created");
     window.location.href = "system.html?name=" + systemRow.data[0].name;
 }

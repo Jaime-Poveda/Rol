@@ -28,14 +28,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 const signUpSubmitted = (event) => {
   event.preventDefault()
-  console.log("hola");
+  //console.log("hola");
   const email = event.target[0].value
   const password = event.target[1].value
 
   _supabase.auth
     .signUp({ email, password })
     .then((response) => {
-      response.error ? alert(response.error.message) : console.log(response)
+      //response.error ? alert(response.error.message) : console.log(response)
     })
     .catch((err) => {
       alert(err)

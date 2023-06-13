@@ -67,11 +67,11 @@ function logOut(event) {
   SUPABASE.auth
     .signOut()
     .then((_response) => {
-      alert("Logout successful");
+      //alert("Logout successful");
       window.location.href = "index.html";
     })
     .catch((err) => {
-      alert(err.response.text);
+      //alert(err.response.text);
     });
 }
 
@@ -465,16 +465,40 @@ async function createCharacter(event) {
   event.preventDefault();
 
   let user = await SUPABASE.auth.getUser();
-  
+
   let userRow = await SUPABASE.from("users")
-  .select()
-  .eq("id", user.data.user.id);
+    .select()
+    .eq("id", user.data.user.id);
 
   if (userRow.data[0].points > 0) {
+
+    /* console.log($("#charImage")[0].value);
+    console.log($("#charImage")[0].value.split(/(\\|\/)/g).pop());
+    console.log(Date.now() + "_" + $("#charImage")[0].value.split(/(\\|\/)/g).pop()); */
+    let imageFullName;
+    $("#charImage")[0].value ? imageFullName = Date.now() + "_" + $("#charImage").prop("files")[0].name : imageFullName = "";
+
+    /* console.log(imageFullName);
+    console.log($("#charImage").prop("files")[0]);
+    console.log($("#charImage").prop("files")[0].name); */
+
+    //const charFile = $("#charImage").prop("files")[0]
+
+    if (imageFullName != "") {
+      SUPABASE
+        .storage
+        .from('characters')
+        .upload(imageFullName, $("#charImage").prop("files")[0], {
+          cacheControl: '3600',
+          upsert: false
+        })
+    }
 
     let characterRow = await SUPABASE.from("characters")
       .upsert({
         userId: user.data.user.id,
+        /* image: $("#charImage")[0].value ? $("#charImage")[0].value : "", */
+        image: $("#charImage")[0].value ? imageFullName : "placeholder.jpg",
         system: $("#charSystem")[0].value ? $("#charSystem")[0].value : "",
         name: $("#charName")[0].value,
         description: $("#charDesc")[0].value ? $("#charDesc")[0].value : "",
@@ -509,7 +533,7 @@ async function createCharacter(event) {
           //alert("Create successful");
         })
         .catch((err) => {
-          alert(err.response.text);
+          //alert(err.response.text);
         });
     }
 
@@ -534,7 +558,7 @@ async function createCharacter(event) {
           //alert("Create successful");
         })
         .catch((err) => {
-          alert(err.response.text);
+          //alert(err.response.text);
         });
     }
 
@@ -559,24 +583,28 @@ async function createCharacter(event) {
           //alert("Create successful");
         })
         .catch((err) => {
-          alert(err.response.text);
+          //alert(err.response.text);
         });
     }
+
+    //console.log(userRow.data[0].points);
+
     SUPABASE.from("users")
       .update({
         points: userRow.data[0].points - 100
       })
       .eq("id", user.data.user.id)
       .then((_response) => {
+        //console.log(_response);
         //alert("Create successful");
       })
       .catch((err) => {
-        alert(err.response.text);
+        //alert(err.response.text);
       });
 
-    alert("Create successful");
+    //alert("Create successful");
     window.location.href = "character.html?id=" + characterRow.data[0].id;
   } else {
-    alert("No hay puntos suficientes para crear un personaje");
+    //alert("No hay puntos suficientes para crear un personaje");
   }
 }
