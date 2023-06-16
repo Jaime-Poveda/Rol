@@ -145,29 +145,29 @@ function emptyModal(event) {
 function addAttribute(event) {
   $("#attrZone").append(
     `
-      <div class="card" style="width: 18rem;">
+      <div class="card bg-primary" style="width: 18rem;">
         <div class="card-body attrGroup">
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Nombre</span>
             <input type="text" class="form-control attrName" placeholder="Nombre" value="`+ event.target.parentNode.parentNode.querySelector("#attrName").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Valor Base</span>
             <input type="number" class="form-control attrBase" placeholder="Valor Base" value="`+ event.target.parentNode.parentNode.querySelector("#attrBase").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Suma</span>
             <input type="number" class="form-control attrSum" placeholder="Suma" value="`+ event.target.parentNode.parentNode.querySelector("#attrSum").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Total</span>
             <input type="number" class="form-control attrTotal" placeholder="Total" value="`+ event.target.parentNode.parentNode.querySelector("#attrTotal").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Modificador</span>
             <input type="number" class="form-control attrModifier" placeholder="Modificador" value="`+ event.target.parentNode.parentNode.querySelector("#attrModifier").value + `">
           </div>
-          <button type="button" class="btn p-0 m-0 border-0 mt-2 delete" style="width: 25px; height: 25px;"><img src="img/icons/remove.png"
+          <button type="button" class="btn p-0 m-0 border-0 mt-2 delete bg-transparent" style="width: 25px; height: 25px;"><img src="img/icons/remove.png"
           alt="DeleteButton" style="width: 100%;"></button>
         </div>
       </div>
@@ -184,25 +184,25 @@ function deleteCard(event) {
 function addSkill(event) {
   $("#skillZone").append(
     `
-      <div class="card" style="width: 18rem;">
+      <div class="card bg-warning" style="width: 18rem;">
         <div class="card-body skillGroup">
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Nombre</span>
             <input type="text" class="form-control skillName" placeholder="Nombre" value="`+ event.target.parentNode.parentNode.querySelector("#skillName").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Descripción</span>
             <input type="text" class="form-control skillDesc" placeholder="Descripción" value="`+ event.target.parentNode.parentNode.querySelector("#skillDesc").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Daño</span>
             <input type="text" class="form-control skillDamage" placeholder="Daño" value="`+ event.target.parentNode.parentNode.querySelector("#skillDamage").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Efecto</span>
             <input type="text" class="form-control skillEffect" placeholder="Efecto" value="`+ event.target.parentNode.parentNode.querySelector("#skillEffect").value + `">
           </div>
-          <button type="button" class="btn p-0 m-0 border-0 mt-2 delete" style="width: 25px; height: 25px;"><img src="img/icons/remove.png"
+          <button type="button" class="btn p-0 m-0 border-0 mt-2 delete bg-transparent" style="width: 25px; height: 25px;"><img src="img/icons/remove.png"
           alt="DeleteButton" style="width: 100%;"></button>
         </div>
       </div>
@@ -215,25 +215,25 @@ function addSkill(event) {
 function addItem(event) {
   $("#itemZone").append(
     `
-      <div class="card" style="width: 18rem;">
-        <div class="card-body itemGroup">
-          <div class="input-group mb-3">
+      <div class="card bg-success" >
+        <div class="card-body itemGroup ">
+          <div class="input-group mb-1">
             <span class="input-group-text">Nombre</span>
             <input type="text" class="form-control itemName" placeholder="Nombre" value="`+ event.target.parentNode.parentNode.querySelector("#itemName").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Descripción</span>
             <input type="text" class="form-control itemDesc" placeholder="Descripción" value="`+ event.target.parentNode.parentNode.querySelector("#itemDesc").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Daño</span>
             <input type="text" class="form-control itemDamage" placeholder="Daño" value="`+ event.target.parentNode.parentNode.querySelector("#itemDamage").value + `">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-1">
             <span class="input-group-text">Cantidad</span>
             <input type="text" class="form-control itemAmount" placeholder="Cantidad" value="`+ event.target.parentNode.parentNode.querySelector("#itemAmount").value + `">
           </div>
-          <button type="button" class="btn p-0 m-0 border-0 mt-2 delete" style="width: 25px; height: 25px;"><img src="img/icons/remove.png"
+          <button type="button" class="btn p-0 m-0 border-0 mt-2 delete bg-transparent" style="width: 25px; height: 25px;"><img src="img/icons/remove.png"
           alt="DeleteButton" style="width: 100%;"></button>
         </div>
       </div>

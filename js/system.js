@@ -79,7 +79,7 @@ async function loadSystem(name) {
         systemRow.data[0].name +
         ` </h1>
                 <h4 class="card-title">Reglas 
-                    <button id="addRuleButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createRuleModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
+                    <button id="addRuleButton" type="button" class="btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#createRuleModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
                 </h4>
                 <div id="rulesZone" class="row justify-content-center">
                 </div>
@@ -211,7 +211,7 @@ async function loadSystem(name) {
     for (let i = 0; i < rules.data.length; i++) {
         $("#rulesZone").append(
             `
-            <div class="card w-auto p-0 m-1 text-dark">
+            <div class="card w-auto p-0 m-1 bg-warning ">
                 <div class="card-body">
                     <div class="card-text">
                         <div class="ruleId" hidden>` +
@@ -224,9 +224,9 @@ async function loadSystem(name) {
             rules.data[i].desc +
             `</h6>
 
-                        <button type="button" class="editRule btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#editRuleModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                        <button type="button" class="editRule btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#editRuleModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
 
-                        <button type="button" class="removeRule btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeRuleModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+                        <button type="button" class="removeRule btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#removeRuleModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
                     </div>
                 </div>
             </div>`

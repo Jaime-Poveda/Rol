@@ -94,7 +94,7 @@ async function loadCharacter(id) {
     `</h2>
     
                 <h3 class="card-title">Características 
-                  <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#characerInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                  <button id="editCharacterButton" type="button" class="btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#characerInfo" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
                 </h3>
                 <div class="row justify-content-center">
                     <div class="card p-0 w-auto text-dark">
@@ -122,19 +122,19 @@ async function loadCharacter(id) {
                 </div>
 
                 <h3 class="card-title mt-3">Atributos 
-                  <button id="addAttrButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createAttrModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
+                  <button id="addAttrButton" type="button" class="btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#createAttrModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
                 </h3>
                 <div id="attrZone" class="row justify-content-center">
                 </div>
 
                 <h3>Equipo 
-                  <button id="addItemButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createItemModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
+                  <button id="addItemButton" type="button" class="btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#createItemModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
                 </h3>
                 <div id="itemsZone" class="row justify-content-center">
                 </div>
 
                 <h3>
-                  Habilidades <button id="addSkillButton" type="button" class="btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#createSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
+                  Habilidades <button id="addSkillButton" type="button" class="btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#createSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/more.png" alt="AddButton" style="width: 100%;"></button>
                 </h3>
                 <div id="skillsZone" class="row justify-content-center">
                 </div>
@@ -479,8 +479,8 @@ async function loadCharacter(id) {
       `</div>
                     </div>
                     <div class="mt-1">
-                      <button type="button" class="editAttr btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#attrModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
-                      <button type="button" class="removeAttr btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeAttrModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+                      <button type="button" class="editAttr btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#attrModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                      <button type="button" class="removeAttr btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#removeAttrModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
                     </div>
                 </div>
             </div>
@@ -512,8 +512,8 @@ async function loadCharacter(id) {
                     <div class="d-flex flex-row justify-content-center"><i>Cantidad:</i>&nbsp<div class="card-text itemAmount">` +
       items.data[i].amount +
       `</div></div>
-                    <button type="button" class="editItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#itemModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
-                    <button type="button" class="removeItem btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeItemModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+                    <button type="button" class="editItem btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#itemModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                    <button type="button" class="removeItem btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#removeItemModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
                 </div>
             </div>
         </div>
@@ -545,8 +545,8 @@ async function loadCharacter(id) {
                     <div class="d-flex flex-row justify-content-center"><i>Efecto:</i>&nbsp<div class="card-text skillEffect">` +
       skills.data[i].effect +
       `</div></div>
-                    <button type="button" class="editSkill btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#skillModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
-                    <button type="button" class="removeSkill btn btn-light p-0 m-0 border-0" data-bs-toggle="modal" data-bs-target="#removeSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
+                    <button type="button" class="editSkill btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#skillModal" style="width: 25px; height: 25px;"><img src="img/icons/edit.png" alt="EditButton" style="width: 100%;"></button>
+                    <button type="button" class="removeSkill btn btn-light p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#removeSkillModal" style="width: 25px; height: 25px;"><img src="img/icons/remove.png" alt="RemoveButton" style="width: 100%;"></button>
                 </div>
             </div>
         </div>
