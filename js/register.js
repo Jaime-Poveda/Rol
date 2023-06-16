@@ -18,7 +18,7 @@ async function signUp(event) {
     .signUp({ email, password })
     .then((response) => {
       if (response.error) {
-        //alert(response.error.message);
+        alert(response.error.message);
       } else {
         //window.location.href = "index.html";
         /* console.log(response);
@@ -33,7 +33,7 @@ async function signUp(event) {
             window.location.href = "index.html";
           })
           .catch((err) => {
-            //alert(err.response.text);
+            alert(err.response.text);
           });
       }
     })

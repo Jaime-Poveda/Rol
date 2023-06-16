@@ -18,8 +18,8 @@ async function loadLogin() {
 
   if (user.data.user === null) {
     $("#logZone").append(`
-      <a href="login.html" class="btn btn-primary">Login</a>
-      <a href="register.html" class="btn btn-primary">Register</a>
+      <a href="login.html" class="btn btn-success">Login</a>
+      <a href="register.html" class="btn btn-success">Register</a>
     `);
   } else {
     let userRow = await SUPABASE.from("users").select().eq("id", user.data.user.id);
@@ -200,7 +200,7 @@ async function loadCharacter(id) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button id="updateCharacterButton" type="button" class="btn btn-primary">Guardar</button>
+                        <button id="updateCharacterButton" type="button" class="btn btn-success">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -218,7 +218,7 @@ async function loadCharacter(id) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button id="updateAttrButton" type="button" class="btn btn-primary">Guardar</button>
+                        <button id="updateAttrButton" type="button" class="btn btn-success">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -236,7 +236,7 @@ async function loadCharacter(id) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button id="updateItemButton" type="button" class="btn btn-primary">Guardar</button>
+                        <button id="updateItemButton" type="button" class="btn btn-success">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -254,7 +254,7 @@ async function loadCharacter(id) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button id="updateSkillButton" type="button" class="btn btn-primary">Guardar</button>
+                        <button id="updateSkillButton" type="button" class="btn btn-success">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -291,7 +291,7 @@ async function loadCharacter(id) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button id="createAttrButton" type="button" class="btn btn-primary">Crear</button>
+                        <button id="createAttrButton" type="button" class="btn btn-success">Crear</button>
                     </div>
                 </div>
             </div>
@@ -324,7 +324,7 @@ async function loadCharacter(id) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button id="createItemButton" type="button" class="btn btn-primary">Crear</button>
+                        <button id="createItemButton" type="button" class="btn btn-success">Crear</button>
                     </div>
                 </div>
             </div>
@@ -357,7 +357,7 @@ async function loadCharacter(id) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button id="createSkillButton" type="button" class="btn btn-primary">Crear</button>
+                        <button id="createSkillButton" type="button" class="btn btn-success">Crear</button>
                     </div>
                 </div>
             </div>
@@ -493,7 +493,7 @@ async function loadCharacter(id) {
   for (let i = 0; i < items.data.length; i++) {
     $("#itemsZone").append(
       `
-        <div class="card w-auto m-1 p-0 bg-warning text-dark">
+        <div class="card w-auto m-1 p-0 bg-success">
             <div class="card-body">
                 <div class="card-text text-center">
                     <div class="itemId" hidden>` +
@@ -526,7 +526,7 @@ async function loadCharacter(id) {
   for (let i = 0; i < skills.data.length; i++) {
     $("#skillsZone").append(
       `
-        <div class="card w-auto m-1 p-0 bg-success text-light">
+        <div class="card w-auto m-1 p-0 bg-warning text-light">
             <div class="card-body">
                 <div class="card-text text-center">
                     <div class="skillId" hidden>` +

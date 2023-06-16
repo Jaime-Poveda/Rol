@@ -17,7 +17,7 @@ function logIn(event) {
     .signInWithPassword({ email, password })
     .then((response) => {
       if (response.error) {
-        //alert(response.error.message);
+        alert(response.error.message);
       } else {
         //console.log(response.data.user);
         window.location.href = "index.html";

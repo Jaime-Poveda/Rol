@@ -1,3 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  /* font-family: "Lato", sans-serif; */
+  font-family: "Roboto", sans-serif;
+}
+
 :root {
   --bs-primary: #ff0000;
   --bs-secondary: #00ff00;
@@ -5,7 +13,7 @@
   --bs-text-color: #ffffff;
 }
 
-html{
+html {
   height: 100%;
 }
 
@@ -14,7 +22,7 @@ body {
   background-color: #0e0e0e !important;
 }
 
-#indexBody{
+#indexBody {
   background: url("../img/backgrounds/forest.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -22,15 +30,16 @@ body {
   background-size: cover;
 }
 
-#createCharacterBody{
-  background: url("../img/backgrounds/bonfire.jpg") no-repeat center center fixed;
+#createCharacterBody {
+  background: url("../img/backgrounds/bonfire.jpg") no-repeat center center
+    fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
-#createSystemBody{
+#createSystemBody {
   background: url("../img/backgrounds/city.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -38,7 +47,7 @@ body {
   background-size: cover;
 }
 
-#characterBody{
+#characterBody {
   background: url("../img/backgrounds/dices.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -46,10 +55,35 @@ body {
   background-size: cover;
 }
 
-#systemBody{
+#systemBody {
   background: url("../img/backgrounds/city2.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+[class*="primary"] {
+  background-color: #12d82c;
+  border: #12d82c;
+}
+
+[class*="success"] {
+  background-color: #12d82c;
+  border: #12d82c;
+}
+
+[class*="danger"] {
+  background-color: #d81212;
+  border: #d81212;
+}
+
+[class*="warning"] {
+  background-color: #5712d8 !important;
+  border: #5712d8 !important;
+}
+
+[class*="info"] {
+  background-color: #126ed8 !important;
+  border: #126ed8 !important;
 }

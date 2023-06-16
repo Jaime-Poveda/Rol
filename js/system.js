@@ -18,8 +18,8 @@ async function loadLogin() {
 
     if (user.data.user === null) {
         $("#logZone").append(`
-        <a href="login.html" class="btn btn-primary">Login</a>
-        <a href="register.html" class="btn btn-primary">Register</a>
+        <a href="login.html" class="btn btn-success">Login</a>
+        <a href="register.html" class="btn btn-success">Register</a>
       `);
     } else {
         let userRow = await SUPABASE.from("users").select().eq("id", user.data.user.id);
@@ -107,14 +107,14 @@ async function loadSystem(name) {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button id="updateSystemButton" type="button" class="btn btn-primary">Guardar</button>
+                                <button id="updateSystemButton" type="button" class="btn btn-success">Guardar</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 
-                <div class="modal fade" id="createRuleModal" tabindex="-1">
+                <div class="modal fade text-dark" id="createRuleModal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -133,13 +133,13 @@ async function loadSystem(name) {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button id="createRuleButton" type="button" class="btn btn-primary">Crear</button>
+                                <button id="createRuleButton" type="button" class="btn btn-success">Crear</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal fade" id="editRuleModal" tabindex="-1">
+                <div class="modal fade text-dark" id="editRuleModal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -151,13 +151,13 @@ async function loadSystem(name) {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button id="updateRuleButton" type="button" class="btn btn-primary">Guardar</button>
+                                <button id="updateRuleButton" type="button" class="btn btn-success">Guardar</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal fade" id="removeRuleModal" tabindex="-1">
+                <div class="modal fade text-dark" id="removeRuleModal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

@@ -10,12 +10,13 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="img/icons/icond10white.png">
 </head>
 
 <body id="createCharacterBody">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">One Role</a>
+            <a class="navbar-brand" href="index.html"><img src="img/icons/icond10white.png" alt="IconD10" style="width: 30px; color: aqua;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavBar"
                 aria-controls="myNavBar">
                 <span class="navbar-toggler-icon"></span>
@@ -56,8 +57,8 @@
                         <datalist id="systems">
                         </datalist>
 
-                        <span class="input-group-text bg-secondary m-0 p-0">
-                            <button type="button" class="btn btn-secondary" id="systemRuleModalButton"
+                        <span class="input-group-text bg-secondary m-0 p-0 rounded-end">
+                            <button type="button" class="btn btn-secondary " id="systemRuleModalButton"
                                 data-bs-toggle="modal" data-bs-target="#systemRuleModal" disabled>
                                 Reglas
                             </button>
@@ -266,7 +267,7 @@
                 </div>
                 <div class="mt-2" id="createCharacterZone">
                 </div>
-                <button id="createCharacterButton" type="submit" class="btn btn-primary">Crear personaje</button>
+                <button id="createCharacterButton" type="submit" class="btn btn-success">Crear personaje</button>
             </form>
         </div>
 

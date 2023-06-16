@@ -29,8 +29,8 @@ async function loadLogin() {
 
   if (user.data.user === null) {
     $("#logZone").append(`
-      <a href="login.html" class="btn btn-primary">Login</a>
-      <a href="register.html" class="btn btn-primary">Register</a>
+      <a href="login.html" class="btn btn-success">Login</a>
+      <a href="register.html" class="btn btn-success">Register</a>
     `);
   } else {
     let userRow = await SUPABASE.from("users").select().eq("id", user.data.user.id);
