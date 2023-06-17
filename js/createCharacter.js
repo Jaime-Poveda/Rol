@@ -145,7 +145,7 @@ function emptyModal(event) {
 function addAttribute(event) {
   $("#attrZone").append(
     `
-      <div class="card bg-primary" style="width: 18rem;">
+      <div class="card bg-primary m-1" style="width: 18rem;">
         <div class="card-body attrGroup">
           <div class="input-group mb-1">
             <span class="input-group-text">Nombre</span>
@@ -184,7 +184,7 @@ function deleteCard(event) {
 function addSkill(event) {
   $("#skillZone").append(
     `
-      <div class="card bg-warning" style="width: 18rem;">
+      <div class="card bg-warning m-1" style="width: 18rem;">
         <div class="card-body skillGroup">
           <div class="input-group mb-1">
             <span class="input-group-text">Nombre</span>
@@ -215,7 +215,7 @@ function addSkill(event) {
 function addItem(event) {
   $("#itemZone").append(
     `
-      <div class="card bg-success" >
+      <div class="card bg-success m-1" >
         <div class="card-body itemGroup ">
           <div class="input-group mb-1">
             <span class="input-group-text">Nombre</span>
